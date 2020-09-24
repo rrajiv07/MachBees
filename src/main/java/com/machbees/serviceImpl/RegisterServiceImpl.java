@@ -85,7 +85,13 @@ public class RegisterServiceImpl implements RegisterService {
 		List<CategoryMetadata> categoryMetadata = categoryRepo.findByCategoryName(categoryName);
 		return categoryMetadata;
 	}
-
+	public JSONObject fetchProfileCategory(long userId) {
+		regResult.clear();
+		UserMaster userMaster = userRepo.findById(userId).get();
+		regResult.put("profileCategory", userMaster.getProfileCategory().getId());
+		return regResult;
+		
+	}
 	public JSONObject updateProfileCategory(UserProfileCategoryFromRequest profileCatDetails) {
 		regResult.clear();
 		if (checkUserIsCompletedByUserId(profileCatDetails.getUserId())) {
@@ -114,7 +120,15 @@ public class RegisterServiceImpl implements RegisterService {
 	public List<ProfileMaster> findByprofileType() {
 		return profileRepo.findAll();
 	}
-
+	
+	public JSONObject fetchProfileType(long userId) {
+		regResult.clear();
+		UserMaster userMaster = userRepo.findById(userId).get();
+		regResult.put("profileType", userMaster.getProfile().getId());
+		return regResult;
+		
+	}
+	
 	@Override
 	public JSONObject updateProfileType(UserProfileTypeFromRequest profileTypeDetails) {
 		regResult.clear();
@@ -246,8 +260,8 @@ public class RegisterServiceImpl implements RegisterService {
 	@Override
 	public JSONObject getPersonaldetails(long userId) {
 		regResult.clear();
-		UserMaster userMasterResult = userRepo.findById(userId).get();
-		regResult.put("PersonalDetails", userMasterResult);
+		UserPersonalDetails userPersonalDetailsResult = personalDtRepo.findByUserId(userId);
+		regResult.put("PersonalDetails", userPersonalDetailsResult);
 		regResult.put("message", "Personal details Retrieved");
 		regResult.put("responseId", HttpStatus.CREATED);
 		regResult.put("responseStatus", "success");

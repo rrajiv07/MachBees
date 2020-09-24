@@ -41,7 +41,7 @@ public class RegisterController {
 	private static final String ENTITY_NAME = "register";
 
 	// setEmailPassword
-	@PostMapping(value = "/register/email")
+	@PostMapping(value = "/common/registration/setEmailPassword")
 	@PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
 	public ResponseEntity<?> setEmailPassword(@Valid @RequestBody UserDetailsFromRequest userdetails) {
 
@@ -53,13 +53,18 @@ public class RegisterController {
 	}
 
 	// getProfileCategory
-	@GetMapping("/common/registration/profileCategory")
+	@GetMapping("/common/metadata/profileCategory")
 	public List<CategoryMetadata> getProfileCategory() throws JsonProcessingException {
 		List<CategoryMetadata> category = regService.findByCategoryName("PROFILE_CATEGORY");
 		System.out.println("category" + category);
 		return category;
 	}
-
+	@GetMapping("/common/registration/profileCategory/{userId}")
+	public ResponseEntity<?> fetchProfileCategory(@PathVariable long userId) {
+		System.out.println("-inside-");
+		JSONObject personalDt = regService.fetchProfileCategory(userId);
+		return new ResponseEntity<JSONObject>(personalDt, HttpStatus.CREATED);
+	}
 	// setProfileCategory
 	@PostMapping("/common/registration/profileCategory")
 	public ResponseEntity<?> updateProfilecategory(@RequestBody UserProfileCategoryFromRequest profileCatDetails) {
@@ -69,13 +74,18 @@ public class RegisterController {
 	}
 
 	// getprofileType
-	@GetMapping("/common/registration/profileType")
+	@GetMapping("/common/metadata/profileType")
 	public List<ProfileMaster> getprofileType() {
 		List<ProfileMaster> profile = regService.findByprofileType();
 		System.out.println("profile" + profile);
 		return profile;
 	}
-
+	@GetMapping("/common/registration/profileType/{userId}")
+	public ResponseEntity<?> fetchProfileType(@PathVariable long userId) {
+		System.out.println("-inside-");
+		JSONObject personalDt = regService.fetchProfileType(userId);
+		return new ResponseEntity<JSONObject>(personalDt, HttpStatus.CREATED);
+	}
 	// setprofileType
 	@PostMapping("/common/registration/profileType")
 	public ResponseEntity<?> setprofileType(@RequestBody UserProfileTypeFromRequest profiletype) {
@@ -85,7 +95,7 @@ public class RegisterController {
 	}
 
 	// getUserLangugageAndProficency
-	@GetMapping("/common/registration/userProficiency")
+	@GetMapping("/common/metadata/userProficiency")
 	public List<CategoryMetadata> getUserProficency() throws JsonProcessingException {
 		List<CategoryMetadata> category = regService.findByCategoryName("USER_PROFICIENCY");
 		System.out.println("category" + category);
@@ -93,7 +103,7 @@ public class RegisterController {
 	}
 
 	// getUserLanguage
-	@GetMapping("/common/registration/userLanguage")
+	@GetMapping("/common/metadata/userLanguage")
 	public List<CategoryMetadata> getUserLanguage() throws JsonProcessingException {
 		List<CategoryMetadata> category = regService.findByCategoryName("USER_SKILLS");
 		System.out.println("category" + category);
@@ -117,7 +127,7 @@ public class RegisterController {
 	}
 
 	// setCompanydetails
-	@PostMapping("/common/registration/companydetails")
+	@PostMapping("/common/registration/companyDetails")
 	public ResponseEntity<?> setCompanydetails(@RequestBody UserCompanyDtFromRequest companydetails) {
 		System.out.println("-inside-");
 		JSONObject personalDt = regService.setCompanydetails(companydetails);
