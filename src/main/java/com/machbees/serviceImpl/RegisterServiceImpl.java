@@ -161,8 +161,14 @@ public class RegisterServiceImpl implements RegisterService {
 		} else {
 
 			// Save personaldetails
-			UserPersonalDetails personaldetails = new UserPersonalDetails();
 			UserMaster userMaster = userRepo.findById(personaldtReq.getUserId()).get();
+			UserPersonalDetails personaldetails = personalDtRepo.findByUserId(personaldtReq.getUserId());
+
+			if (personaldetails != null)
+				System.out.println("Existing Record Retrieved");
+			else
+				personaldetails = new UserPersonalDetails();
+
 			personaldetails.setUser(userMaster);
 			personaldetails.setName(personaldtReq.getName());
 			personaldetails.setSurname(personaldtReq.getSurName());
@@ -176,6 +182,13 @@ public class RegisterServiceImpl implements RegisterService {
 			// save langAndProficiency
 			for (UserLanguageAndProficiency langAndProfRequest : personaldtReq.getLanguage()) {
 				UserLanguageDetails llp = new UserLanguageDetails();
+				/*
+				 * List<UserLanguageDetails> llp =
+				 * langAndProfRepo.findByUserId(personaldtReq.getUserId()); if (llp != null)
+				 * System.out.println("Existing Record Retrieved"); else llp = new
+				 * UserLanguageDetails();
+				 */
+
 				llp.setUser(userMaster);
 				if ((categoryRepo.findById(langAndProfRequest.getLanguage()) == null)
 						|| (categoryRepo.findById(langAndProfRequest.getProficiency()) == null)) {
@@ -183,6 +196,7 @@ public class RegisterServiceImpl implements RegisterService {
 					regResult.put("responseId", HttpStatus.BAD_REQUEST);
 					regResult.put("responseStatus", "failure");
 				} else {
+
 					llp.setLanguage(categoryRepo.findById(langAndProfRequest.getLanguage()).get());
 					llp.setProficiency(categoryRepo.findById(langAndProfRequest.getProficiency()).get());
 					personalDtRepo.save(personaldetails);
@@ -220,8 +234,14 @@ public class RegisterServiceImpl implements RegisterService {
 			regResult.put("responseStatus", "failure");
 		} else {
 			// Save companydetails
-			UserCompanyDetails companydetails = new UserCompanyDetails();
 			UserMaster userMaster = userRepo.findById(companydtReq.getUserId()).get();
+			UserCompanyDetails companydetails = companyDtRepo.findByUserId(companydtReq.getUserId());
+
+			if (companydetails != null)
+				System.out.println("Existing Record Retrieved");
+			else
+				companydetails = new UserCompanyDetails();
+
 			companydetails.setUser(userMaster);
 			companydetails.setName(companydtReq.getCompanyName());
 			companydetails.setVat(companydtReq.getVatId());

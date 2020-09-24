@@ -1,5 +1,6 @@
 package com.machbees.repository;
 
+import com.machbees.domain.UserMaster;
 import com.machbees.domain.UserPersonalDetails;
 
 import org.springframework.data.jpa.repository.*;
@@ -11,4 +12,6 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface UserPersonalDetailsRepository extends JpaRepository<UserPersonalDetails, Long> {
+
+	UserPersonalDetails findByUserId(long userId);
 }
