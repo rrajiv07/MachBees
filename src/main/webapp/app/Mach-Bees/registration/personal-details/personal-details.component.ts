@@ -6,6 +6,7 @@ import { IUserSkillCategoryMetadata } from 'app/shared/model/MachBees/user-skill
 import { IUserProficiencyCategoryMetadata } from 'app/shared/model/MachBees/user-proficiency-category-metadata.model';
 import swal from 'sweetalert2';
 export interface Language {
+  id?: number;
   language?: number;
   proficiency?: number;
 }
@@ -41,7 +42,7 @@ export class PersonalDetailsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {}
   save(): void {
-    this.isSaving = true;
+    //this.isSaving = true;
     const serviceInput = {};
     const userId = this.editForm.get(['userId'])!.value;
     const name = this.editForm.get(['name'])!.value;
@@ -62,14 +63,15 @@ export class PersonalDetailsComponent implements OnInit, AfterViewInit {
     serviceInput['linkedIn'] = linkedIn;
     serviceInput['twitter'] = twitter;
     serviceInput['skypeAddress'] = skypeAddress;
-    serviceInput['language'] = this.language;
+    if (this.language == null) serviceInput['language'] = null;
+    else serviceInput['language'] = this.language;
 
     this.service.save(JSON.stringify(serviceInput)).subscribe(response => {
       if (response != undefined) {
         if (response['responseStatus'] == 'failure') {
           this.processError(response);
         } else {
-          this.route.navigateByUrl('registration/ChooseSubscription');
+          //this.route.navigateByUrl('registration/ChooseSubscription');
         }
       }
     });
@@ -117,6 +119,8 @@ export class PersonalDetailsComponent implements OnInit, AfterViewInit {
     const tmpNewRecord = {};
     tmpNewRecord['language'] = '';
     tmpNewRecord['proficiency'] = '';
+    tmpNewRecord['id'] = '';
+
     recorddata.push(tmpNewRecord);
     this.language = recorddata;
   }

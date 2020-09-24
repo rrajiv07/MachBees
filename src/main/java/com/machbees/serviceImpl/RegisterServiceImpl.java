@@ -155,7 +155,7 @@ public class RegisterServiceImpl implements RegisterService {
 			regResult.put("message", "Your Registration is under verification");
 			regResult.put("responseId", HttpStatus.BAD_REQUEST);
 			regResult.put("responseStatus", "failure");
-		} else if ((personaldtReq.getLanguage() == null)) {
+		} else if ((personaldtReq.getLanguage() == null) || (personaldtReq.getLanguage().isEmpty()) ) {
 			regResult.put("message", "Please enter language details");
 			regResult.put("responseId", HttpStatus.BAD_REQUEST);
 			regResult.put("responseStatus", "failure");
@@ -191,13 +191,31 @@ public class RegisterServiceImpl implements RegisterService {
 				 */
 
 				llp.setUser(userMaster);
-				if ((categoryRepo.findById(langAndProfRequest.getLanguage()) == null)
-						|| (categoryRepo.findById(langAndProfRequest.getProficiency()) == null)) {
-					regResult.put("message", "please select valid Language/Proficiency category");
+				System.out.println("Rajiv1111111>>>>>>>>"+langAndProfRequest.getLanguage());
+				if (langAndProfRequest.getLanguage() ==0)
+				{
+					regResult.put("message", "Please select language");
+					regResult.put("responseId", HttpStatus.BAD_REQUEST);
+					regResult.put("responseStatus", "failure");
+					
+				}
+				else if (langAndProfRequest.getProficiency() ==0)
+				{
+					regResult.put("message", "Please select proficiency");
+					regResult.put("responseId", HttpStatus.BAD_REQUEST);
+					regResult.put("responseStatus", "failure");
+					
+				}
+				else if ((categoryRepo.findById(langAndProfRequest.getLanguage()) == null)) {
+					regResult.put("message", "Please select valid language");
+					regResult.put("responseId", HttpStatus.BAD_REQUEST);
+					regResult.put("responseStatus", "failure");
+				}
+				else if ((categoryRepo.findById(langAndProfRequest.getProficiency()) == null)) {
+					regResult.put("message", "please select valid proficiency");
 					regResult.put("responseId", HttpStatus.BAD_REQUEST);
 					regResult.put("responseStatus", "failure");
 				} else {
-
 					llp.setLanguage(categoryRepo.findById(langAndProfRequest.getLanguage()).get());
 					llp.setProficiency(categoryRepo.findById(langAndProfRequest.getProficiency()).get());
 					personalDtRepo.save(personaldetails);

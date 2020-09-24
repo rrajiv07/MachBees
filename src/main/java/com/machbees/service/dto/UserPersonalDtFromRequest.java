@@ -84,7 +84,7 @@ public class UserPersonalDtFromRequest {
 	}
 
 	public void setLanguage(List<UserLanguageAndProficiency> language) {
-		Language = language;
+		this.Language = language;
 	}
 
 	public long getUserId() {
