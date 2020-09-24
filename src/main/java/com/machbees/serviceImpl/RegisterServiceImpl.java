@@ -181,17 +181,9 @@ public class RegisterServiceImpl implements RegisterService {
 			personaldetails.setTwitter(personaldtReq.getTwitter());
 
 			// save langAndProficiency
+			Boolean errorFlag= true;
 			for (UserLanguageAndProficiency langAndProfRequest : personaldtReq.getLanguage()) {
-				UserLanguageDetails llp = new UserLanguageDetails();
-				/*
-				 * List<UserLanguageDetails> llp =
-				 * langAndProfRepo.findByUserId(personaldtReq.getUserId()); if (llp != null)
-				 * System.out.println("Existing Record Retrieved"); else llp = new
-				 * UserLanguageDetails();
-				 */
-
-				llp.setUser(userMaster);
-				System.out.println("Rajiv1111111>>>>>>>>"+langAndProfRequest.getLanguage());
+				errorFlag = true;
 				if (langAndProfRequest.getLanguage() ==0)
 				{
 					regResult.put("message", "Please select language");
@@ -215,15 +207,37 @@ public class RegisterServiceImpl implements RegisterService {
 					regResult.put("message", "please select valid proficiency");
 					regResult.put("responseId", HttpStatus.BAD_REQUEST);
 					regResult.put("responseStatus", "failure");
-				} else {
+				}
+				else
+				{
+					errorFlag =false;
+				}
+			}
+			
+			if (!errorFlag) 			{
+			for (UserLanguageAndProficiency langAndProfRequest : personaldtReq.getLanguage()) {
+				
+				UserLanguageDetails llp;
+				if (langAndProfRequest.getId() ==0)
+				{
+					llp = new UserLanguageDetails();
+				} 
+				else 
+				{
+					llp= langAndProfRepo.findById(langAndProfRequest.getId());
+				}
+					llp.setUser(userMaster);
+				
+				
 					llp.setLanguage(categoryRepo.findById(langAndProfRequest.getLanguage()).get());
-					llp.setProficiency(categoryRepo.findById(langAndProfRequest.getProficiency()).get());
+					llp.setProficiency(categoryRepo.findById(langAndProfRequest.getProficiency()).get()); 
 					personalDtRepo.save(personaldetails);
 					langAndProfRepo.save(llp);
 					regResult.put("message", "Personal details Inserted");
 					regResult.put("responseStatus", "success");
 					regResult.put("userId", userMaster.getId());
-				}
+				
+			}
 			}
 		}
 		return regResult;

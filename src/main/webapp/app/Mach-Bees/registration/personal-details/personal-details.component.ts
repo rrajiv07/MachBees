@@ -101,14 +101,19 @@ export class PersonalDetailsComponent implements OnInit, AfterViewInit {
         }
       });
     });
-    /*
-  this.language=[
-    {
-      "language": 7,
-      "proficiency": 9
-    }
-  ];
-  */
+
+    this.language = [
+      {
+        language: 7,
+        proficiency: 9,
+        id: 5552,
+      },
+      {
+        language: 7,
+        proficiency: 9,
+        id: 5553,
+      },
+    ];
   }
 
   gridAdd(): void {

@@ -2,6 +2,7 @@ package com.machbees.service.dto;
 
 public class UserLanguageAndProficiency {
 
+	private long id;
 	private long language;
 	private long proficiency;
 
@@ -19,6 +20,14 @@ public class UserLanguageAndProficiency {
 
 	public void setProficiency(long proficiency) {
 		this.proficiency = proficiency;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }
