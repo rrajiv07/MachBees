@@ -135,6 +135,7 @@ public class RegisterServiceImpl implements RegisterService {
 					userRepo.save(userMaster);
 					regResult.put("userId", userMaster.getId());
 					regResult.put("message", "User details Updated");
+					regResult.put("profileCategory", userMaster.getProfileCategory().getCategoryDescription().toString());
 					regResult.put("responseId", HttpStatus.CREATED);
 					regResult.put("responseStatus", "success");
 				}
