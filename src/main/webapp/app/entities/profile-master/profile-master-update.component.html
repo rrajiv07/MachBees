@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-profile-master-heading">Create or edit a Profile Master</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_profileCode">Profile Code</label>
+                    <input type="text" class="form-control" name="profileCode" id="field_profileCode"
+                           formControlName="profileCode"/>
+                    <div *ngIf="editForm.get('profileCode')!.invalid && (editForm.get('profileCode')!.dirty || editForm.get('profileCode')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('profileCode')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('profileCode')?.errors?.maxlength">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_profileName">Profile Name</label>
+                    <input type="text" class="form-control" name="profileName" id="field_profileName"
+                           formControlName="profileName"/>
+                    <div *ngIf="editForm.get('profileName')!.invalid && (editForm.get('profileName')!.dirty || editForm.get('profileName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('profileName')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('profileName')?.errors?.maxlength">
+                        This field cannot be longer than 40 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_profileDescription">Profile Description</label>
+                    <input type="text" class="form-control" name="profileDescription" id="field_profileDescription"
+                           formControlName="profileDescription"/>
+                    <div *ngIf="editForm.get('profileDescription')!.invalid && (editForm.get('profileDescription')!.dirty || editForm.get('profileDescription')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('profileDescription')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('profileDescription')?.errors?.maxlength">
+                        This field cannot be longer than 80 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

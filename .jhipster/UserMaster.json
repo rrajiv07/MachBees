@@ -1,0 +1,84 @@
+{
+  "name": "UserMaster",
+  "fields": [
+    {
+      "fieldName": "emailId",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength",
+        "pattern"
+      ],
+      "fieldValidateRulesMaxlength": "40",
+      "fieldValidateRulesPattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "userLanguageDetails",
+      "otherEntityRelationshipName": "user",
+      "relationshipName": "userlanguagedetails"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categoryMetadata",
+      "otherEntityRelationshipName": "userMaster",
+      "relationshipName": "status",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "profileMaster",
+      "otherEntityRelationshipName": "userMaster",
+      "relationshipName": "profile",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categoryMetadata",
+      "otherEntityRelationshipName": "userMaster",
+      "relationshipName": "profileCategory",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categoryMetadata",
+      "otherEntityRelationshipName": "userMaster",
+      "relationshipName": "paymentSubscription",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200924045753",
+  "entityTableName": "user_master",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

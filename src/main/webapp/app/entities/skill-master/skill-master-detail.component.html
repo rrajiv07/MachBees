@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="skillMaster">
+            <h2><span>Skill Master</span> {{ skillMaster.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Skill Code</span></dt>
+                <dd>
+                    <span>{{ skillMaster.skillCode }}</span>
+                </dd>
+                <dt><span>Skill Name</span></dt>
+                <dd>
+                    <span>{{ skillMaster.skillName }}</span>
+                </dd>
+                <dt><span>Skill Description</span></dt>
+                <dd>
+                    <span>{{ skillMaster.skillDescription }}</span>
+                </dd>
+                <dt><span>Skill Category</span></dt>
+                <dd>
+                    <div *ngIf="skillMaster.skillCategory">
+                        <a [routerLink]="['/skill-category-master', skillMaster.skillCategory?.id, 'view']">{{ skillMaster.skillCategory?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/skill-master', skillMaster.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

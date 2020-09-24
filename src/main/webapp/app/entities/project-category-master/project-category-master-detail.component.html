@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="projectCategoryMaster">
+            <h2><span>Project Category Master</span> {{ projectCategoryMaster.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Category Code</span></dt>
+                <dd>
+                    <span>{{ projectCategoryMaster.categoryCode }}</span>
+                </dd>
+                <dt><span>Category Name</span></dt>
+                <dd>
+                    <span>{{ projectCategoryMaster.categoryName }}</span>
+                </dd>
+                <dt><span>Category Description</span></dt>
+                <dd>
+                    <span>{{ projectCategoryMaster.categoryDescription }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/project-category-master', projectCategoryMaster.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

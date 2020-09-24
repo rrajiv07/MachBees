@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="projectSpecificationMaster">
+            <h2><span>Project Specification Master</span> {{ projectSpecificationMaster.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Specification Code</span></dt>
+                <dd>
+                    <span>{{ projectSpecificationMaster.specificationCode }}</span>
+                </dd>
+                <dt><span>Specification Name</span></dt>
+                <dd>
+                    <span>{{ projectSpecificationMaster.specificationName }}</span>
+                </dd>
+                <dt><span>Specification Description</span></dt>
+                <dd>
+                    <span>{{ projectSpecificationMaster.specificationDescription }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/project-specification-master', projectSpecificationMaster.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-project-type-master-heading">Create or edit a Project Type Master</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_projectTypeCode">Project Type Code</label>
+                    <input type="text" class="form-control" name="projectTypeCode" id="field_projectTypeCode"
+                           formControlName="projectTypeCode"/>
+                    <div *ngIf="editForm.get('projectTypeCode')!.invalid && (editForm.get('projectTypeCode')!.dirty || editForm.get('projectTypeCode')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('projectTypeCode')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('projectTypeCode')?.errors?.maxlength">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_projectTypeName">Project Type Name</label>
+                    <input type="text" class="form-control" name="projectTypeName" id="field_projectTypeName"
+                           formControlName="projectTypeName"/>
+                    <div *ngIf="editForm.get('projectTypeName')!.invalid && (editForm.get('projectTypeName')!.dirty || editForm.get('projectTypeName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('projectTypeName')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('projectTypeName')?.errors?.maxlength">
+                        This field cannot be longer than 80 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_projectTypeDescription">Project Type Description</label>
+                    <input type="text" class="form-control" name="projectTypeDescription" id="field_projectTypeDescription"
+                           formControlName="projectTypeDescription"/>
+                    <div *ngIf="editForm.get('projectTypeDescription')!.invalid && (editForm.get('projectTypeDescription')!.dirty || editForm.get('projectTypeDescription')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('projectTypeDescription')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('projectTypeDescription')?.errors?.maxlength">
+                        This field cannot be longer than 80 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

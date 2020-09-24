@@ -48,6 +48,30 @@ public class CacheConfiguration {
             createCache(cm, com.machbees.domain.User.class.getName());
             createCache(cm, com.machbees.domain.Authority.class.getName());
             createCache(cm, com.machbees.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.machbees.domain.CategoryMetadata.class.getName());
+            createCache(cm, com.machbees.domain.ProfileMaster.class.getName());
+            createCache(cm, com.machbees.domain.ProjectTypeMaster.class.getName());
+            createCache(cm, com.machbees.domain.ProjectSpecificationMaster.class.getName());
+            createCache(cm, com.machbees.domain.ProjectCategoryMaster.class.getName());
+            createCache(cm, com.machbees.domain.ProjectFeatureMaster.class.getName());
+            createCache(cm, com.machbees.domain.ProjectRoleMaster.class.getName());
+            createCache(cm, com.machbees.domain.SkillCategoryMaster.class.getName());
+            createCache(cm, com.machbees.domain.SkillMaster.class.getName());
+            createCache(cm, com.machbees.domain.UserMaster.class.getName());
+            createCache(cm, com.machbees.domain.UserMaster.class.getName() + ".userlanguagedetails");
+            createCache(cm, com.machbees.domain.UserPersonalDetails.class.getName());
+            createCache(cm, com.machbees.domain.UserCompanyDetails.class.getName());
+            createCache(cm, com.machbees.domain.UserLanguageDetails.class.getName());
+            createCache(cm, com.machbees.domain.ProjectHdr.class.getName());
+            createCache(cm, com.machbees.domain.ProjectHdr.class.getName() + ".projectattachmentdetails");
+            createCache(cm, com.machbees.domain.ProjectHdr.class.getName() + ".projectfeaturedetails");
+            createCache(cm, com.machbees.domain.ProjectHdr.class.getName() + ".projectroledetails");
+            createCache(cm, com.machbees.domain.ProjectHdr.class.getName() + ".projectskilldetails");
+            createCache(cm, com.machbees.domain.ProjectAttachmentDtl.class.getName());
+            createCache(cm, com.machbees.domain.ProjectFeatureDtl.class.getName());
+            createCache(cm, com.machbees.domain.ProjectRoleDtl.class.getName());
+            createCache(cm, com.machbees.domain.ProjectSkillDtl.class.getName());
+            createCache(cm, com.machbees.domain.ProjectBudgetDtl.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

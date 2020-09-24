@@ -1,0 +1,148 @@
+{
+  "name": "ProjectHdr",
+  "fields": [
+    {
+      "fieldName": "overview",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "80"
+    },
+    {
+      "fieldName": "projectDescription",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "125"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "modifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "modifiedDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "projectAttachmentDtl",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "projectattachmentdetails"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "projectFeatureDtl",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "projectfeaturedetails"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "projectRoleDtl",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "projectroledetails"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "projectSkillDtl",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "projectskilldetails"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "projectTypeMaster",
+      "otherEntityRelationshipName": "projectHdr",
+      "relationshipName": "projectType",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "projectSpecificationMaster",
+      "otherEntityRelationshipName": "projectHdr",
+      "relationshipName": "projectSpecification",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categoryMetadata",
+      "otherEntityRelationshipName": "projectHdr",
+      "relationshipName": "applicationType",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categoryMetadata",
+      "otherEntityRelationshipName": "projectHdr",
+      "relationshipName": "model",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "projectCategoryMaster",
+      "otherEntityRelationshipName": "projectHdr",
+      "relationshipName": "projectCategory",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categoryMetadata",
+      "otherEntityRelationshipName": "projectHdr",
+      "relationshipName": "visibility",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categoryMetadata",
+      "otherEntityRelationshipName": "projectHdr",
+      "relationshipName": "preferContactedBy",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categoryMetadata",
+      "otherEntityRelationshipName": "projectHdr",
+      "relationshipName": "status",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200924050153",
+  "entityTableName": "project_hdr",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

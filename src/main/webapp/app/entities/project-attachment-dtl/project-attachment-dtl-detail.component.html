@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="projectAttachmentDtl">
+            <h2><span>Project Attachment Dtl</span> {{ projectAttachmentDtl.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>File Id</span></dt>
+                <dd>
+                    <span>{{ projectAttachmentDtl.fileId }}</span>
+                </dd>
+                <dt><span>File Name</span></dt>
+                <dd>
+                    <span>{{ projectAttachmentDtl.fileName }}</span>
+                </dd>
+                <dt><span>File Type</span></dt>
+                <dd>
+                    <span>{{ projectAttachmentDtl.fileType }}</span>
+                </dd>
+                <dt><span>Project</span></dt>
+                <dd>
+                    <div *ngIf="projectAttachmentDtl.project">
+                        <a [routerLink]="['/project-hdr', projectAttachmentDtl.project?.id, 'view']">{{ projectAttachmentDtl.project?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/project-attachment-dtl', projectAttachmentDtl.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

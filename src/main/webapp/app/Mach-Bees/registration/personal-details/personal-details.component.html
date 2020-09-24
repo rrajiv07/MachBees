@@ -1,0 +1,177 @@
+<div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+    <h2 id="jhi-personal-details-heading">Personal Details</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        
+        <div class="col-md-4">
+            <form name="form" role="form">
+                <div class="form-group" >
+                    <input type="text"  readonly class="form-control" value="Set email & password">
+                </div>
+                <div class="form-group">
+                    <input type="text"  readonly class="form-control" value="Type of profile">
+                </div>
+                <div class="form-group">
+                    <input type="text" readonly class="form-control" value="Select profile">
+                </div>
+                <div class="form-group">
+                    <input type="text" style="background: #82B3DE;color: #fff;font-weight: bold;" readonly class="form-control" value="Personal details">
+                </div>
+                <div class="form-group">
+                    <input type="text" readonly class="form-control" value="Choose subscription">
+                </div>
+                <div class="form-group">
+                    <input type="text" readonly class="form-control" value="Payment method">
+                </div>
+                <div class="form-group">
+                    <input type="text" readonly class="form-control" value="Confirm">
+                </div>
+            </form>
+        </div>
+        <div class="col-6" style="background: white;border: 1px solid #82B3DE;margin:2px;">
+            <form name="editForm"  role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                
+    
+                <div>
+                    <jhi-alert-error></jhi-alert-error>
+    
+                    <div class="form-group">
+                        <label for="userId">User Id</label>
+                        <input type="text" class="form-control" id="userId" name="userId" formControlName="userId" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_name">Name</label>
+                        <input type="text" class="form-control" name="name" id="field_name"
+                               formControlName="name"/>
+                        <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('name')?.errors?.required">
+                            This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('name')?.errors?.maxlength">
+                            This field cannot be longer than 40 characters.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_surName">Surname</label>
+                        <input type="text" class="form-control" name="name" id="field_surName"
+                               formControlName="surName"/>
+                        <div *ngIf="editForm.get('surName')!.invalid && (editForm.get('surName')!.dirty || editForm.get('surName')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('surName')?.errors?.required">
+                            This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('surName')?.errors?.maxlength">
+                            This field cannot be longer than 20 characters.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_address">Address</label>
+                        <input type="text" class="form-control" name="address" id="field_address"
+                               formControlName="address"/>
+                        <div *ngIf="editForm.get('address')!.invalid && (editForm.get('address')!.dirty || editForm.get('address')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('address')?.errors?.required">
+                            This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('address')?.errors?.maxlength">
+                            This field cannot be longer than 80 characters.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_country">Country</label>
+                        <input type="text" class="form-control" name="country" id="field_country"
+                               formControlName="country"/>
+                        <div *ngIf="editForm.get('country')!.invalid && (editForm.get('country')!.dirty || editForm.get('country')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('country')?.errors?.required">
+                            This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('country')?.errors?.maxlength">
+                            This field cannot be longer than 40 characters.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_mobile">Mobile</label>
+                        <input type="text" class="form-control" name="mobile" id="field_mobile"
+                               formControlName="mobile"/>
+                        <div *ngIf="editForm.get('mobile')!.invalid && (editForm.get('mobile')!.dirty || editForm.get('mobile')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('mobile')?.errors?.required">
+                            This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('mobile')?.errors?.maxlength">
+                            This field cannot be longer than 40 characters.
+                            </small>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_linkedIn">LinkedIn</label>
+                        <input type="text" class="form-control" name="linkedIn" id="field_linkedIn"
+                               formControlName="linkedIn"/>
+                        <div *ngIf="editForm.get('linkedIn')!.invalid && (editForm.get('linkedIn')!.dirty || editForm.get('linkedIn')!.touched)">
+                           
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('linkedIn')?.errors?.maxlength">
+                            This field cannot be longer than 40 characters.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_twitter">Twitter</label>
+                        <input type="text" class="form-control" name="twitter" id="field_twitter"
+                               formControlName="twitter"/>
+                        <div *ngIf="editForm.get('twitter')!.invalid && (editForm.get('twitter')!.dirty || editForm.get('twitter')!.touched)">
+                           
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('twitter')?.errors?.maxlength">
+                            This field cannot be longer than 40 characters.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_skypeAddress">Skype Address</label>
+                        <input type="text" class="form-control" name="skypeAddress" id="field_skypeAddress"
+                               formControlName="skypeAddress"/>
+                        <div *ngIf="editForm.get('skypeAddress')!.invalid && (editForm.get('skypeAddress')!.dirty || editForm.get('skypeAddress')!.touched)">
+                           
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('skypeAddress')?.errors?.maxlength">
+                            This field cannot be longer than 40 characters.
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+    
+                <div style="padding-bottom: 5px;">
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                        <fa-icon icon="ban"></fa-icon>&nbsp;<span>Back</span>
+                    </button>
+    
+                    <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                        <fa-icon icon="save"></fa-icon>&nbsp;<span>Next</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    

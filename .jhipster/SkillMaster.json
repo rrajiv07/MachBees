@@ -1,0 +1,52 @@
+{
+  "name": "SkillMaster",
+  "fields": [
+    {
+      "fieldName": "skillCode",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "skillName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "80"
+    },
+    {
+      "fieldName": "skillDescription",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "80"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "skillCategoryMaster",
+      "otherEntityRelationshipName": "skillMaster",
+      "relationshipName": "skillCategory",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200924045653",
+  "entityTableName": "skill_master",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

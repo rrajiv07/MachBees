@@ -1,0 +1,71 @@
+<div>
+    <h2 id="page-heading">
+        <span>Project Feature Dtls</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-project-feature-dtl" [routerLink]="['/project-feature-dtl/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Project Feature Dtl
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="projectFeatureDtls?.length === 0">
+        <span>No projectFeatureDtls found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="projectFeatureDtls && projectFeatureDtls.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Feature</span></th>
+                    <th scope="col" ><span>Project</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let projectFeatureDtl of projectFeatureDtls ;trackBy: trackId">
+                    <td><a [routerLink]="['/project-feature-dtl', projectFeatureDtl.id, 'view']">{{ projectFeatureDtl.id }}</a></td>
+                    <td>
+                        <div *ngIf="projectFeatureDtl.feature">
+                            <a [routerLink]="['/project-feature-master', projectFeatureDtl.feature?.id, 'view']" >{{ projectFeatureDtl.feature?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="projectFeatureDtl.project">
+                            <a [routerLink]="['/project-hdr', projectFeatureDtl.project?.id, 'view']" >{{ projectFeatureDtl.project?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/project-feature-dtl', projectFeatureDtl.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/project-feature-dtl', projectFeatureDtl.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(projectFeatureDtl)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

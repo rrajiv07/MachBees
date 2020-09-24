@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="projectHdr">
+            <h2><span>Project Hdr</span> {{ projectHdr.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Overview</span></dt>
+                <dd>
+                    <span>{{ projectHdr.overview }}</span>
+                </dd>
+                <dt><span>Project Description</span></dt>
+                <dd>
+                    <span>{{ projectHdr.projectDescription }}</span>
+                </dd>
+                <dt><span>End Date</span></dt>
+                <dd>
+                    <span>{{ projectHdr.endDate }}</span>
+                </dd>
+                <dt><span>Created By</span></dt>
+                <dd>
+                    <span>{{ projectHdr.createdBy }}</span>
+                </dd>
+                <dt><span>Created Date</span></dt>
+                <dd>
+                    <span>{{ projectHdr.createdDate }}</span>
+                </dd>
+                <dt><span>Modified By</span></dt>
+                <dd>
+                    <span>{{ projectHdr.modifiedBy }}</span>
+                </dd>
+                <dt><span>Modified Date</span></dt>
+                <dd>
+                    <span>{{ projectHdr.modifiedDate }}</span>
+                </dd>
+                <dt><span>Project Type</span></dt>
+                <dd>
+                    <div *ngIf="projectHdr.projectType">
+                        <a [routerLink]="['/project-type-master', projectHdr.projectType?.id, 'view']">{{ projectHdr.projectType?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Project Specification</span></dt>
+                <dd>
+                    <div *ngIf="projectHdr.projectSpecification">
+                        <a [routerLink]="['/project-specification-master', projectHdr.projectSpecification?.id, 'view']">{{ projectHdr.projectSpecification?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Application Type</span></dt>
+                <dd>
+                    <div *ngIf="projectHdr.applicationType">
+                        <a [routerLink]="['/category-metadata', projectHdr.applicationType?.id, 'view']">{{ projectHdr.applicationType?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Model</span></dt>
+                <dd>
+                    <div *ngIf="projectHdr.model">
+                        <a [routerLink]="['/category-metadata', projectHdr.model?.id, 'view']">{{ projectHdr.model?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Project Category</span></dt>
+                <dd>
+                    <div *ngIf="projectHdr.projectCategory">
+                        <a [routerLink]="['/project-category-master', projectHdr.projectCategory?.id, 'view']">{{ projectHdr.projectCategory?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Visibility</span></dt>
+                <dd>
+                    <div *ngIf="projectHdr.visibility">
+                        <a [routerLink]="['/category-metadata', projectHdr.visibility?.id, 'view']">{{ projectHdr.visibility?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Prefer Contacted By</span></dt>
+                <dd>
+                    <div *ngIf="projectHdr.preferContactedBy">
+                        <a [routerLink]="['/category-metadata', projectHdr.preferContactedBy?.id, 'view']">{{ projectHdr.preferContactedBy?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <div *ngIf="projectHdr.status">
+                        <a [routerLink]="['/category-metadata', projectHdr.status?.id, 'view']">{{ projectHdr.status?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/project-hdr', projectHdr.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

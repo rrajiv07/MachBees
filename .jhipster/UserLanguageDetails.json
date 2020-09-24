@@ -1,0 +1,38 @@
+{
+  "name": "UserLanguageDetails",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categoryMetadata",
+      "otherEntityRelationshipName": "userLanguageDetails",
+      "relationshipName": "language",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categoryMetadata",
+      "otherEntityRelationshipName": "userLanguageDetails",
+      "relationshipName": "proficiency",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "userMaster",
+      "otherEntityRelationshipName": "userlanguagedetails",
+      "relationshipName": "user",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200924050053",
+  "entityTableName": "user_language_details",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

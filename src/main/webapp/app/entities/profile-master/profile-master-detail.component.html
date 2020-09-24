@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="profileMaster">
+            <h2><span>Profile Master</span> {{ profileMaster.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Profile Code</span></dt>
+                <dd>
+                    <span>{{ profileMaster.profileCode }}</span>
+                </dd>
+                <dt><span>Profile Name</span></dt>
+                <dd>
+                    <span>{{ profileMaster.profileName }}</span>
+                </dd>
+                <dt><span>Profile Description</span></dt>
+                <dd>
+                    <span>{{ profileMaster.profileDescription }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/profile-master', profileMaster.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

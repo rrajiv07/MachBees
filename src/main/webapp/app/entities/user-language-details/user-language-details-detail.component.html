@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="userLanguageDetails">
+            <h2><span>User Language Details</span> {{ userLanguageDetails.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Language</span></dt>
+                <dd>
+                    <div *ngIf="userLanguageDetails.language">
+                        <a [routerLink]="['/category-metadata', userLanguageDetails.language?.id, 'view']">{{ userLanguageDetails.language?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Proficiency</span></dt>
+                <dd>
+                    <div *ngIf="userLanguageDetails.proficiency">
+                        <a [routerLink]="['/category-metadata', userLanguageDetails.proficiency?.id, 'view']">{{ userLanguageDetails.proficiency?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>User</span></dt>
+                <dd>
+                    <div *ngIf="userLanguageDetails.user">
+                        <a [routerLink]="['/user-master', userLanguageDetails.user?.id, 'view']">{{ userLanguageDetails.user?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/user-language-details', userLanguageDetails.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

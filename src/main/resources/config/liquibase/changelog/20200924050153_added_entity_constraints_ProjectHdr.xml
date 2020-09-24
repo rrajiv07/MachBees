@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity ProjectHdr.
+    -->
+    <changeSet id="20200924050153-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="project_type_id"
+                                 baseTableName="project_hdr"
+                                 constraintName="fk_project_hdr_project_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_type_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_specification_id"
+                                 baseTableName="project_hdr"
+                                 constraintName="fk_project_hdr_project_specification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_specification_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="application_type_id"
+                                 baseTableName="project_hdr"
+                                 constraintName="fk_project_hdr_application_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_metadata"/>
+
+        <addForeignKeyConstraint baseColumnNames="model_id"
+                                 baseTableName="project_hdr"
+                                 constraintName="fk_project_hdr_model_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_metadata"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_category_id"
+                                 baseTableName="project_hdr"
+                                 constraintName="fk_project_hdr_project_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_category_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="visibility_id"
+                                 baseTableName="project_hdr"
+                                 constraintName="fk_project_hdr_visibility_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_metadata"/>
+
+        <addForeignKeyConstraint baseColumnNames="prefer_contacted_by_id"
+                                 baseTableName="project_hdr"
+                                 constraintName="fk_project_hdr_prefer_contacted_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_metadata"/>
+
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="project_hdr"
+                                 constraintName="fk_project_hdr_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_metadata"/>
+
+    </changeSet>
+</databaseChangeLog>

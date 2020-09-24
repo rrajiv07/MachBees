@@ -1,0 +1,91 @@
+<div>
+    <h2 id="page-heading">
+        <span>User Masters</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-user-master" [routerLink]="['/user-master/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new User Master
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="userMasters?.length === 0">
+        <span>No userMasters found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="userMasters && userMasters.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Email Id</span></th>
+                    <th scope="col" ><span>Password</span></th>
+                    <th scope="col" ><span>Updated By</span></th>
+                    <th scope="col" ><span>Updated Date</span></th>
+                    <th scope="col" ><span>Status</span></th>
+                    <th scope="col" ><span>Profile</span></th>
+                    <th scope="col" ><span>Profile Category</span></th>
+                    <th scope="col" ><span>Payment Subscription</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let userMaster of userMasters ;trackBy: trackId">
+                    <td><a [routerLink]="['/user-master', userMaster.id, 'view']">{{ userMaster.id }}</a></td>
+                    <td>{{ userMaster.emailId }}</td>
+                    <td>{{ userMaster.password }}</td>
+                    <td>{{ userMaster.updatedBy }}</td>
+                    <td>{{ userMaster.updatedDate | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="userMaster.status">
+                            <a [routerLink]="['/category-metadata', userMaster.status?.id, 'view']" >{{ userMaster.status?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="userMaster.profile">
+                            <a [routerLink]="['/profile-master', userMaster.profile?.id, 'view']" >{{ userMaster.profile?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="userMaster.profileCategory">
+                            <a [routerLink]="['/category-metadata', userMaster.profileCategory?.id, 'view']" >{{ userMaster.profileCategory?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="userMaster.paymentSubscription">
+                            <a [routerLink]="['/category-metadata', userMaster.paymentSubscription?.id, 'view']" >{{ userMaster.paymentSubscription?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/user-master', userMaster.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/user-master', userMaster.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(userMaster)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

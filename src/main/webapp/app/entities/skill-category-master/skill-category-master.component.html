@@ -1,0 +1,65 @@
+<div>
+    <h2 id="page-heading">
+        <span>Skill Category Masters</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-skill-category-master" [routerLink]="['/skill-category-master/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Skill Category Master
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="skillCategoryMasters?.length === 0">
+        <span>No skillCategoryMasters found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="skillCategoryMasters && skillCategoryMasters.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Category Code</span></th>
+                    <th scope="col" ><span>Category Name</span></th>
+                    <th scope="col" ><span>Category Description</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let skillCategoryMaster of skillCategoryMasters ;trackBy: trackId">
+                    <td><a [routerLink]="['/skill-category-master', skillCategoryMaster.id, 'view']">{{ skillCategoryMaster.id }}</a></td>
+                    <td>{{ skillCategoryMaster.categoryCode }}</td>
+                    <td>{{ skillCategoryMaster.categoryName }}</td>
+                    <td>{{ skillCategoryMaster.categoryDescription }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/skill-category-master', skillCategoryMaster.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/skill-category-master', skillCategoryMaster.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(skillCategoryMaster)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

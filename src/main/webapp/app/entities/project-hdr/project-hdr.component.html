@@ -1,0 +1,121 @@
+<div>
+    <h2 id="page-heading">
+        <span>Project Hdrs</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-project-hdr" [routerLink]="['/project-hdr/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Project Hdr
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="projectHdrs?.length === 0">
+        <span>No projectHdrs found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="projectHdrs && projectHdrs.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Overview</span></th>
+                    <th scope="col" ><span>Project Description</span></th>
+                    <th scope="col" ><span>End Date</span></th>
+                    <th scope="col" ><span>Created By</span></th>
+                    <th scope="col" ><span>Created Date</span></th>
+                    <th scope="col" ><span>Modified By</span></th>
+                    <th scope="col" ><span>Modified Date</span></th>
+                    <th scope="col" ><span>Project Type</span></th>
+                    <th scope="col" ><span>Project Specification</span></th>
+                    <th scope="col" ><span>Application Type</span></th>
+                    <th scope="col" ><span>Model</span></th>
+                    <th scope="col" ><span>Project Category</span></th>
+                    <th scope="col" ><span>Visibility</span></th>
+                    <th scope="col" ><span>Prefer Contacted By</span></th>
+                    <th scope="col" ><span>Status</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let projectHdr of projectHdrs ;trackBy: trackId">
+                    <td><a [routerLink]="['/project-hdr', projectHdr.id, 'view']">{{ projectHdr.id }}</a></td>
+                    <td>{{ projectHdr.overview }}</td>
+                    <td>{{ projectHdr.projectDescription }}</td>
+                    <td>{{ projectHdr.endDate | date:'mediumDate' }}</td>
+                    <td>{{ projectHdr.createdBy }}</td>
+                    <td>{{ projectHdr.createdDate | date:'mediumDate' }}</td>
+                    <td>{{ projectHdr.modifiedBy }}</td>
+                    <td>{{ projectHdr.modifiedDate | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="projectHdr.projectType">
+                            <a [routerLink]="['/project-type-master', projectHdr.projectType?.id, 'view']" >{{ projectHdr.projectType?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="projectHdr.projectSpecification">
+                            <a [routerLink]="['/project-specification-master', projectHdr.projectSpecification?.id, 'view']" >{{ projectHdr.projectSpecification?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="projectHdr.applicationType">
+                            <a [routerLink]="['/category-metadata', projectHdr.applicationType?.id, 'view']" >{{ projectHdr.applicationType?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="projectHdr.model">
+                            <a [routerLink]="['/category-metadata', projectHdr.model?.id, 'view']" >{{ projectHdr.model?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="projectHdr.projectCategory">
+                            <a [routerLink]="['/project-category-master', projectHdr.projectCategory?.id, 'view']" >{{ projectHdr.projectCategory?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="projectHdr.visibility">
+                            <a [routerLink]="['/category-metadata', projectHdr.visibility?.id, 'view']" >{{ projectHdr.visibility?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="projectHdr.preferContactedBy">
+                            <a [routerLink]="['/category-metadata', projectHdr.preferContactedBy?.id, 'view']" >{{ projectHdr.preferContactedBy?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="projectHdr.status">
+                            <a [routerLink]="['/category-metadata', projectHdr.status?.id, 'view']" >{{ projectHdr.status?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/project-hdr', projectHdr.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/project-hdr', projectHdr.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(projectHdr)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

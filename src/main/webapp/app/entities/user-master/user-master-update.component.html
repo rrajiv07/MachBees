@@ -1,0 +1,116 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-user-master-heading">Create or edit a User Master</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_emailId">Email Id</label>
+                    <input type="text" class="form-control" name="emailId" id="field_emailId"
+                           formControlName="emailId"/>
+                    <div *ngIf="editForm.get('emailId')!.invalid && (editForm.get('emailId')!.dirty || editForm.get('emailId')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('emailId')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('emailId')?.errors?.maxlength">
+                        This field cannot be longer than 40 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('emailId')?.errors?.pattern">
+                            This field should follow pattern for "Email Id".
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_password">Password</label>
+                    <input type="text" class="form-control" name="password" id="field_password"
+                           formControlName="password"/>
+                    <div *ngIf="editForm.get('password')!.invalid && (editForm.get('password')!.dirty || editForm.get('password')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('password')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('password')?.errors?.maxlength">
+                        This field cannot be longer than 40 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_updatedBy">Updated By</label>
+                    <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
+                           formControlName="updatedBy"/>
+                    <div *ngIf="editForm.get('updatedBy')!.invalid && (editForm.get('updatedBy')!.dirty || editForm.get('updatedBy')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('updatedBy')?.errors?.maxlength">
+                        This field cannot be longer than 40 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_updatedDate">Updated Date</label>
+                    <div class="input-group">
+                        <input id="field_updatedDate" type="text" class="form-control" name="updatedDate" ngbDatepicker #updatedDateDp="ngbDatepicker" formControlName="updatedDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="updatedDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_status">Status</label>
+                    <select class="form-control" id="field_status" name="status" formControlName="status">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="categoryMetadataOption.id === editForm.get('status')!.value?.id ? editForm.get('status')!.value : categoryMetadataOption" *ngFor="let categoryMetadataOption of categorymetadata; trackBy: trackById">{{ categoryMetadataOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_profile">Profile</label>
+                    <select class="form-control" id="field_profile" name="profile" formControlName="profile">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="profileMasterOption.id === editForm.get('profile')!.value?.id ? editForm.get('profile')!.value : profileMasterOption" *ngFor="let profileMasterOption of profilemasters; trackBy: trackById">{{ profileMasterOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_profileCategory">Profile Category</label>
+                    <select class="form-control" id="field_profileCategory" name="profileCategory" formControlName="profileCategory">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="categoryMetadataOption.id === editForm.get('profileCategory')!.value?.id ? editForm.get('profileCategory')!.value : categoryMetadataOption" *ngFor="let categoryMetadataOption of categorymetadata; trackBy: trackById">{{ categoryMetadataOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_paymentSubscription">Payment Subscription</label>
+                    <select class="form-control" id="field_paymentSubscription" name="paymentSubscription" formControlName="paymentSubscription">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="categoryMetadataOption.id === editForm.get('paymentSubscription')!.value?.id ? editForm.get('paymentSubscription')!.value : categoryMetadataOption" *ngFor="let categoryMetadataOption of categorymetadata; trackBy: trackById">{{ categoryMetadataOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="projectRoleMaster">
+            <h2><span>Project Role Master</span> {{ projectRoleMaster.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Role Code</span></dt>
+                <dd>
+                    <span>{{ projectRoleMaster.roleCode }}</span>
+                </dd>
+                <dt><span>Role Name</span></dt>
+                <dd>
+                    <span>{{ projectRoleMaster.roleName }}</span>
+                </dd>
+                <dt><span>Role Description</span></dt>
+                <dd>
+                    <span>{{ projectRoleMaster.roleDescription }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/project-role-master', projectRoleMaster.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

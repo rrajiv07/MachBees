@@ -1,0 +1,31 @@
+{
+  "name": "ProjectFeatureDtl",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "projectFeatureMaster",
+      "otherEntityRelationshipName": "projectFeatureDtl",
+      "relationshipName": "feature",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "projectHdr",
+      "otherEntityRelationshipName": "projectfeaturedetails",
+      "relationshipName": "project",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200924050353",
+  "entityTableName": "project_feature_dtl",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

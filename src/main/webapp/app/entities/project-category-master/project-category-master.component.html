@@ -1,0 +1,65 @@
+<div>
+    <h2 id="page-heading">
+        <span>Project Category Masters</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-project-category-master" [routerLink]="['/project-category-master/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Project Category Master
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="projectCategoryMasters?.length === 0">
+        <span>No projectCategoryMasters found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="projectCategoryMasters && projectCategoryMasters.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Category Code</span></th>
+                    <th scope="col" ><span>Category Name</span></th>
+                    <th scope="col" ><span>Category Description</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let projectCategoryMaster of projectCategoryMasters ;trackBy: trackId">
+                    <td><a [routerLink]="['/project-category-master', projectCategoryMaster.id, 'view']">{{ projectCategoryMaster.id }}</a></td>
+                    <td>{{ projectCategoryMaster.categoryCode }}</td>
+                    <td>{{ projectCategoryMaster.categoryName }}</td>
+                    <td>{{ projectCategoryMaster.categoryDescription }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/project-category-master', projectCategoryMaster.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/project-category-master', projectCategoryMaster.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(projectCategoryMaster)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

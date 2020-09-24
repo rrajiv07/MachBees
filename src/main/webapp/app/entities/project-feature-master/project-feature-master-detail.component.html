@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="projectFeatureMaster">
+            <h2><span>Project Feature Master</span> {{ projectFeatureMaster.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Feature Code</span></dt>
+                <dd>
+                    <span>{{ projectFeatureMaster.featureCode }}</span>
+                </dd>
+                <dt><span>Feature Name</span></dt>
+                <dd>
+                    <span>{{ projectFeatureMaster.featureName }}</span>
+                </dd>
+                <dt><span>Feature Description</span></dt>
+                <dd>
+                    <span>{{ projectFeatureMaster.featureDescription }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/project-feature-master', projectFeatureMaster.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

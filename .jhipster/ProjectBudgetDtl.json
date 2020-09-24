@@ -1,0 +1,34 @@
+{
+  "name": "ProjectBudgetDtl",
+  "fields": [
+    {
+      "fieldName": "budget",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "ipOwnership",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "projectHdr",
+      "otherEntityRelationshipName": "projectBudgetDtl",
+      "relationshipName": "project",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200924050653",
+  "entityTableName": "project_budget_dtl",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

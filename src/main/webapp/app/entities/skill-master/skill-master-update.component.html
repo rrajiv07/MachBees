@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-skill-master-heading">Create or edit a Skill Master</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_skillCode">Skill Code</label>
+                    <input type="text" class="form-control" name="skillCode" id="field_skillCode"
+                           formControlName="skillCode"/>
+                    <div *ngIf="editForm.get('skillCode')!.invalid && (editForm.get('skillCode')!.dirty || editForm.get('skillCode')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('skillCode')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('skillCode')?.errors?.maxlength">
+                        This field cannot be longer than 40 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_skillName">Skill Name</label>
+                    <input type="text" class="form-control" name="skillName" id="field_skillName"
+                           formControlName="skillName"/>
+                    <div *ngIf="editForm.get('skillName')!.invalid && (editForm.get('skillName')!.dirty || editForm.get('skillName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('skillName')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('skillName')?.errors?.maxlength">
+                        This field cannot be longer than 80 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_skillDescription">Skill Description</label>
+                    <input type="text" class="form-control" name="skillDescription" id="field_skillDescription"
+                           formControlName="skillDescription"/>
+                    <div *ngIf="editForm.get('skillDescription')!.invalid && (editForm.get('skillDescription')!.dirty || editForm.get('skillDescription')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('skillDescription')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('skillDescription')?.errors?.maxlength">
+                        This field cannot be longer than 80 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_skillCategory">Skill Category</label>
+                    <select class="form-control" id="field_skillCategory" name="skillCategory" formControlName="skillCategory">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="skillCategoryMasterOption.id === editForm.get('skillCategory')!.value?.id ? editForm.get('skillCategory')!.value : skillCategoryMasterOption" *ngFor="let skillCategoryMasterOption of skillcategorymasters; trackBy: trackById">{{ skillCategoryMasterOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

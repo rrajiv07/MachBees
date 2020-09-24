@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity UserMaster.
+    -->
+    <changeSet id="20200924045753-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="user_master"
+                                 constraintName="fk_user_master_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_metadata"/>
+
+        <addForeignKeyConstraint baseColumnNames="profile_id"
+                                 baseTableName="user_master"
+                                 constraintName="fk_user_master_profile_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="profile_category_id"
+                                 baseTableName="user_master"
+                                 constraintName="fk_user_master_profile_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_metadata"/>
+
+        <addForeignKeyConstraint baseColumnNames="payment_subscription_id"
+                                 baseTableName="user_master"
+                                 constraintName="fk_user_master_payment_subscription_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_metadata"/>
+
+    </changeSet>
+</databaseChangeLog>

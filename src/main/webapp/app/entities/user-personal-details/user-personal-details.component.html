@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span>User Personal Details</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-user-personal-details" [routerLink]="['/user-personal-details/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new User Personal Details
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="userPersonalDetails?.length === 0">
+        <span>No userPersonalDetails found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="userPersonalDetails && userPersonalDetails.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Name</span></th>
+                    <th scope="col" ><span>Surname</span></th>
+                    <th scope="col" ><span>Address</span></th>
+                    <th scope="col" ><span>Country</span></th>
+                    <th scope="col" ><span>Mobile</span></th>
+                    <th scope="col" ><span>Linkedin</span></th>
+                    <th scope="col" ><span>Twitter</span></th>
+                    <th scope="col" ><span>Skype</span></th>
+                    <th scope="col" ><span>Self Presentation</span></th>
+                    <th scope="col" ><span>Virtualcv</span></th>
+                    <th scope="col" ><span>User</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let userPersonalDetails of userPersonalDetails ;trackBy: trackId">
+                    <td><a [routerLink]="['/user-personal-details', userPersonalDetails.id, 'view']">{{ userPersonalDetails.id }}</a></td>
+                    <td>{{ userPersonalDetails.name }}</td>
+                    <td>{{ userPersonalDetails.surname }}</td>
+                    <td>{{ userPersonalDetails.address }}</td>
+                    <td>{{ userPersonalDetails.country }}</td>
+                    <td>{{ userPersonalDetails.mobile }}</td>
+                    <td>{{ userPersonalDetails.linkedin }}</td>
+                    <td>{{ userPersonalDetails.twitter }}</td>
+                    <td>{{ userPersonalDetails.skype }}</td>
+                    <td>{{ userPersonalDetails.selfPresentation }}</td>
+                    <td>{{ userPersonalDetails.virtualcv }}</td>
+                    <td>
+                        <div *ngIf="userPersonalDetails.user">
+                            <a [routerLink]="['/user-master', userPersonalDetails.user?.id, 'view']" >{{ userPersonalDetails.user?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/user-personal-details', userPersonalDetails.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/user-personal-details', userPersonalDetails.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(userPersonalDetails)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
