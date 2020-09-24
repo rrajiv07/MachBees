@@ -15,7 +15,7 @@ export class ProfileTypeComponent implements OnInit, AfterViewInit {
   isSaving = false;
   editForm = this.fb.group({
     userId: [],
-    profileCategory: ['', [Validators.required]],
+    profileCategory: [null, [Validators.required]],
   });
 
   constructor(private fb: FormBuilder, private service: ProfileTypeService, private activeRoute: ActivatedRoute, private route: Router) {}

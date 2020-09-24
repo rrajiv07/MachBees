@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import './vendor';
 import { MachBeesSharedModule } from 'app/shared/shared.module';
 import { MachBeesCoreModule } from 'app/core/core.module';
@@ -18,6 +18,7 @@ import { RegistrationModule } from './Mach-Bees/registration/registration.module
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     MachBeesSharedModule,
     MachBeesCoreModule,
     MachBeesHomeModule,
