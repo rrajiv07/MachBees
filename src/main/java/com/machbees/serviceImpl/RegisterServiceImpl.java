@@ -1,5 +1,7 @@
 package com.machbees.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.json.simple.JSONObject;
@@ -27,6 +29,8 @@ import com.machbees.service.dto.UserPersonalDtFromRequest;
 import com.machbees.service.dto.UserProfileCategoryFromRequest;
 import com.machbees.service.dto.UserProfileTypeFromRequest;
 import com.machbees.service.dto.UserSetSubcriptionFromRequest;
+
+import net.minidev.json.JSONArray;
 
 @Service
 @Transactional
@@ -261,10 +265,33 @@ public class RegisterServiceImpl implements RegisterService {
 	public JSONObject getPersonaldetails(long userId) {
 		regResult.clear();
 		UserPersonalDetails userPersonalDetailsResult = personalDtRepo.findByUserId(userId);
-		regResult.put("PersonalDetails", userPersonalDetailsResult);
+		ArrayList languageArr = new ArrayList();
+		Iterator languageIterator = langAndProfRepo.findByUserId(userId).iterator();
+		
+		while(languageIterator.hasNext()) {
+		     UserLanguageDetails userLanguageDetailsResult = (UserLanguageDetails) languageIterator.next();
+		     JSONObject languageObj = new JSONObject();
+		     languageObj.put("id", userLanguageDetailsResult.getId());
+		     languageObj.put("language", userLanguageDetailsResult.getLanguage().getId());
+		     languageObj.put("proficiency", userLanguageDetailsResult.getProficiency().getId());
+		     languageArr.add(languageObj);
+		}
+		
+		 
+		regResult.put("userId", userPersonalDetailsResult.getUser().getId());
+		regResult.put("name", userPersonalDetailsResult.getName());
+		regResult.put("surName", userPersonalDetailsResult.getSurname());
+		regResult.put("address", userPersonalDetailsResult.getAddress());
+		regResult.put("country", userPersonalDetailsResult.getCountry());
+		regResult.put("mobile", userPersonalDetailsResult.getMobile());
+		regResult.put("linkedIn", userPersonalDetailsResult.getLinkedin());
+		regResult.put("twitter", userPersonalDetailsResult.getTwitter());
+		regResult.put("skypeAddress", userPersonalDetailsResult.getSkype());
+		regResult.put("language", languageArr);		
+		//regResult.put("PersonalDetails", userPersonalDetailsResult);
 		regResult.put("message", "Personal details Retrieved");
 		regResult.put("responseId", HttpStatus.CREATED);
-		regResult.put("responseStatus", "success");
+		regResult.put("responseStatus", "success"); 
 		return regResult;
 	}
 

@@ -17,7 +17,7 @@ export class SetEmailPasswordService {
       .set('Accept', '*/*')
       .set('Authorization', 'Bearer ' + localStorage.getItem('JWT_TOKEN'))
       .set('X-Requested-With', 'XMLHttpRequest');
-    return this.http.post(SERVER_API_URL + 'api/register/email', serviceInput, { headers: headers });
+    return this.http.post(SERVER_API_URL + 'api/common/registration/setEmailPassword', serviceInput, { headers: headers });
   }
   AuthTokenGeneration(serviceInput: any): Observable<{}> {
     const headers = new HttpHeaders()

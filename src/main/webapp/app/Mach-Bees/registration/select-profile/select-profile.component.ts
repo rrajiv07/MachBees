@@ -56,6 +56,12 @@ export class SelectProfileComponent implements OnInit, AfterViewInit {
         this.profiletypemasters = response;
       }
     });
+    const userId = this.editForm.get(['userId'])!.value;
+    this.service.fetch(userId).subscribe(response => {
+      if (response != undefined) {
+        this.editForm.patchValue(response);
+      }
+    });
   }
   private processError(response: any): void {
     this.isSaving = false;

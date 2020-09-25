@@ -16,14 +16,10 @@ public interface RegisterService {
 	public JSONObject setEmailPassword(String emailId, String password);
 
 	public List<CategoryMetadata> findByCategoryName(String categoryName);
-	
-	public JSONObject fetchProfileCategory(long userId);
 
 	public JSONObject updateProfileCategory(UserProfileCategoryFromRequest profileCatDetails);
 
 	List<ProfileMaster> findByprofileType();
-	
-	public JSONObject fetchProfileType(long userId);
 
 	public JSONObject updateProfileType(UserProfileTypeFromRequest profiletype);
 
@@ -36,5 +32,9 @@ public interface RegisterService {
 	public JSONObject updateSubscription(UserSetSubcriptionFromRequest setSubscription);
 
 	public JSONObject updateConfirm(int userId);
+
+	public JSONObject fetchProfileType(long userId);
+
+	public JSONObject fetchProfileCategory(long userId);
 
 }

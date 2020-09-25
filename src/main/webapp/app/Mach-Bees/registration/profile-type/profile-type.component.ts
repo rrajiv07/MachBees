@@ -55,6 +55,12 @@ export class ProfileTypeComponent implements OnInit, AfterViewInit {
         this.profilecategorymasters = response;
       }
     });
+    const userId = this.editForm.get(['userId'])!.value;
+    this.service.fetch(userId).subscribe(response => {
+      if (response != undefined) {
+        this.editForm.patchValue(response);
+      }
+    });
   }
   private processError(response: any): void {
     this.isSaving = false;

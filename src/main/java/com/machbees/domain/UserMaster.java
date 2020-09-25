@@ -25,7 +25,7 @@ public class UserMaster implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    private Long id;
+    private Long id; 
 
     @NotNull
     @Size(max = 40)

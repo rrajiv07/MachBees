@@ -20,4 +20,5 @@ public interface UserMasterRepository extends JpaRepository<UserMaster, Long> {
 	UserMaster findById(int id);
 
 	UserMaster findByIdAndStatus(long userId, CategoryMetadata byCategoryCodeAndCategoryName);
+	
 }

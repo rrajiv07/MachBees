@@ -23,6 +23,14 @@ export class SelectProfileService {
       .set('Accept', '*/*')
       .set('Authorization', 'Bearer ' + localStorage.getItem('JWT_TOKEN'))
       .set('X-Requested-With', 'XMLHttpRequest');
-    return this.http.get(SERVER_API_URL + 'api/common/registration/profileType', { headers: headers });
+    return this.http.get(SERVER_API_URL + 'api/common/metadata/profileType', { headers: headers });
+  }
+  fetch(userId: any): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Accept', '*/*')
+      .set('Authorization', 'Bearer ' + localStorage.getItem('JWT_TOKEN'))
+      .set('X-Requested-With', 'XMLHttpRequest');
+    return this.http.get(SERVER_API_URL + 'api/common/registration/profileType/' + userId, { headers: headers });
   }
 }

@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserLanguageDetailsRepository extends JpaRepository<UserLanguageDetails, Long> {
 
-	List<UserLanguageDetails> findByUserId(long userId);
-	UserLanguageDetails findById(long id);
+	List findByUserId(long userId);
+	UserLanguageDetails findById(long id); 
 }

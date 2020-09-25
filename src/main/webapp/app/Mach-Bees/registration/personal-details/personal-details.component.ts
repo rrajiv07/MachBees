@@ -71,13 +71,14 @@ export class PersonalDetailsComponent implements OnInit, AfterViewInit {
         if (response['responseStatus'] == 'failure') {
           this.processError(response);
         } else {
-          //this.route.navigateByUrl('registration/ChooseSubscription');
+          this.route.navigateByUrl('registration/ChooseSubscription');
         }
       }
     });
   }
   previousState(): void {
-    this.service.back();
+    const userId = this.editForm.get(['userId'])!.value;
+    this.route.navigateByUrl('registration/SelectProfile/' + userId);
   }
   trackById(index: number, item: any): any {
     return item.id;
@@ -87,21 +88,26 @@ export class PersonalDetailsComponent implements OnInit, AfterViewInit {
     if (tmpobj != null) {
       tmpobj.setValue(this.activeRoute.snapshot.paramMap.get('userId'));
     }
-    setTimeout(() => {
-      this.service.UserLanguageComboLoading().subscribe(response => {
-        if (response != undefined) {
-          this.languagemasters = response;
-        }
-      });
+
+    this.service.UserLanguageComboLoading().subscribe(response => {
+      if (response != undefined) {
+        this.languagemasters = response;
+      }
     });
-    setTimeout(() => {
-      this.service.UserProficiencyComboLoading().subscribe(response => {
-        if (response != undefined) {
-          this.proficiencymasters = response;
-        }
-      });
+    this.service.UserProficiencyComboLoading().subscribe(response => {
+      if (response != undefined) {
+        this.proficiencymasters = response;
+      }
+    });
+    const userId = this.editForm.get(['userId'])!.value;
+    this.service.fetch(userId).subscribe(response => {
+      if (response != undefined) {
+        this.editForm.patchValue(response);
+        this.language = response['language'];
+      }
     });
 
+    /*
     this.language = [
       {
         language: 7,
@@ -114,6 +120,7 @@ export class PersonalDetailsComponent implements OnInit, AfterViewInit {
         id: 5553,
       },
     ];
+    */
   }
 
   gridAdd(): void {

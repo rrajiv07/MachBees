@@ -17,16 +17,13 @@ export class PersonalDetailsService {
       .set('X-Requested-With', 'XMLHttpRequest');
     return this.http.post(SERVER_API_URL + 'api/common/registration/personalDetails', serviceInput, { headers: headers });
   }
-  back(): void {
-    this.routerLink.navigateByUrl('registration/SelectProfile');
-  }
   UserLanguageComboLoading(): Observable<any> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', '*/*')
       .set('Authorization', 'Bearer ' + localStorage.getItem('JWT_TOKEN'))
       .set('X-Requested-With', 'XMLHttpRequest');
-    return this.http.get(SERVER_API_URL + 'api/common/registration/userLanguage', { headers: headers });
+    return this.http.get(SERVER_API_URL + 'api/common/metadata/userLanguage', { headers: headers });
   }
   UserProficiencyComboLoading(): Observable<any> {
     const headers = new HttpHeaders()
@@ -34,6 +31,14 @@ export class PersonalDetailsService {
       .set('Accept', '*/*')
       .set('Authorization', 'Bearer ' + localStorage.getItem('JWT_TOKEN'))
       .set('X-Requested-With', 'XMLHttpRequest');
-    return this.http.get(SERVER_API_URL + 'api/common/registration/userProficiency', { headers: headers });
+    return this.http.get(SERVER_API_URL + 'api/common/metadata/userProficiency', { headers: headers });
+  }
+  fetch(userId: any): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Accept', '*/*')
+      .set('Authorization', 'Bearer ' + localStorage.getItem('JWT_TOKEN'))
+      .set('X-Requested-With', 'XMLHttpRequest');
+    return this.http.get(SERVER_API_URL + 'api/common/registration/personalDetails/' + userId, { headers: headers });
   }
 }
