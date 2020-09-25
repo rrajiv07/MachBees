@@ -1,9 +1,11 @@
 <div>
+    <!--
     <div class="row justify-content-center">
         <div class="col-md-12">
     <h2 id="jhi-profile-category-heading">Choose Subscription</h2>
         </div>
     </div>
+    -->
     <div class="row justify-content-center">
         
         <div class="col-md-4">
@@ -37,12 +39,12 @@
     
                 <div>
                     <jhi-alert-error></jhi-alert-error>
-    
+                    <!--
                     <div class="form-group">
                         <label for="userId">User Id</label>
                         <input type="text" class="form-control" id="userId" name="userId" formControlName="userId" readonly />
                     </div>
-    
+                    -->
                     <div class="form-group">
                         <label class="form-control-label" for="field_subscription">Choose Subscription</label>
                         <select class="form-control" id="field_subscription" name="subscription" formControlName="subscription">
@@ -53,12 +55,12 @@
                     </div>
                 </div>
     
-                <div>
+                <div style="text-align: center;">
                     <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                         <fa-icon icon="ban"></fa-icon>&nbsp;<span>Back</span>
                     </button>
     
-                    <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <button style="background: #37a000;border:0px;" type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
                         <fa-icon icon="save"></fa-icon>&nbsp;<span>Next</span>
                     </button>
                 </div>

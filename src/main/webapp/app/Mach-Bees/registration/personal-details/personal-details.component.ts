@@ -23,11 +23,11 @@ export class PersonalDetailsComponent implements OnInit, AfterViewInit {
 
   editForm = this.fb.group({
     userId: [],
-    name: ['Rajiv', [Validators.required, Validators.maxLength(40)]],
-    surName: ['R', [Validators.required, Validators.maxLength(20)]],
-    address: ['Chennai', [Validators.required, Validators.maxLength(80)]],
-    country: ['India', [Validators.required, Validators.maxLength(40)]],
-    mobile: ['1234567890', [Validators.required, Validators.maxLength(40)]],
+    name: ['', [Validators.required, Validators.maxLength(40)]],
+    surName: ['', [Validators.required, Validators.maxLength(20)]],
+    address: ['', [Validators.required, Validators.maxLength(80)]],
+    country: ['', [Validators.required, Validators.maxLength(40)]],
+    mobile: ['', [Validators.required, Validators.maxLength(40)]],
     linkedIn: [null, [Validators.maxLength(40)]],
     twitter: [null, [Validators.maxLength(40)]],
     skypeAddress: [null, [Validators.maxLength(40)]],

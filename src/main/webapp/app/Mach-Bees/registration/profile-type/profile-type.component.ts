@@ -38,9 +38,11 @@ export class ProfileTypeComponent implements OnInit, AfterViewInit {
       }
     });
   }
+  /*
   previousState(): void {
     this.route.navigateByUrl('registration/SetEmailPassword');
   }
+  */
   trackById(index: number, item: IProfileCategory): any {
     return item.id;
   }

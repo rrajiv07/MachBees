@@ -24,12 +24,12 @@ export class CompanyDetailsComponent implements OnInit, AfterViewInit {
 
   editForm = this.fb.group({
     userId: [],
-    companyName: ['BCT', [Validators.required, Validators.maxLength(40)]],
-    vatId: ['1234', [Validators.required, Validators.maxLength(40)]],
-    website: ['Chennai', [Validators.maxLength(20)]],
-    description: ['India', [Validators.maxLength(100)]],
-    address: ['Chennai', [Validators.required, Validators.maxLength(80)]],
-    mobile: ['1234567890', [Validators.required, Validators.maxLength(40)]],
+    companyName: ['', [Validators.required, Validators.maxLength(40)]],
+    vatId: ['', [Validators.required, Validators.maxLength(40)]],
+    website: ['', [Validators.maxLength(20)]],
+    description: ['', [Validators.maxLength(100)]],
+    address: ['', [Validators.required, Validators.maxLength(80)]],
+    mobile: ['', [Validators.required, Validators.maxLength(40)]],
     linkedIn: [null, [Validators.maxLength(40)]],
     twitter: [null, [Validators.maxLength(40)]],
     skypeAddress: [null, [Validators.maxLength(40)]],
@@ -100,7 +100,7 @@ export class CompanyDetailsComponent implements OnInit, AfterViewInit {
         if (response['responseStatus'] == 'failure') {
           this.processError(response);
         } else {
-          //this.route.navigateByUrl('registration/ChooseSubscription/' + userId);
+          this.route.navigateByUrl('registration/ChooseSubscription/' + userId);
         }
       }
     });

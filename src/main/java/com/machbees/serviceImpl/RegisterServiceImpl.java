@@ -92,8 +92,11 @@ public class RegisterServiceImpl implements RegisterService {
 
 	public JSONObject fetchProfileCategory(long userId) {
 		regResult.clear();
-		UserMaster userMaster = userRepo.findById(userId).get();
+		UserMaster userMaster = userRepo.findById(userId).get();		
+		if (userMaster.getProfileCategory() != null)
+		{
 		regResult.put("profileCategory", userMaster.getProfileCategory().getId());
+		}		
 		return regResult;
 
 	}
@@ -101,7 +104,10 @@ public class RegisterServiceImpl implements RegisterService {
 	public JSONObject fetchSubscription(long userId) {
 		regResult.clear();
 		UserMaster userMaster = userRepo.findById(userId).get();
+		if (userMaster.getPaymentSubscription() != null)
+		{
 		regResult.put("subscription", userMaster.getPaymentSubscription().getId());
+		}
 		return regResult;
 
 	}
@@ -138,7 +144,10 @@ public class RegisterServiceImpl implements RegisterService {
 	public JSONObject fetchProfileType(long userId) {
 		regResult.clear();
 		UserMaster userMaster = userRepo.findById(userId).get();
+		if (userMaster.getProfile() != null)
+		{
 		regResult.put("profileType", userMaster.getProfile().getId());
+		}
 		return regResult;
 
 	}
@@ -274,10 +283,12 @@ public class RegisterServiceImpl implements RegisterService {
 			languageObj.put("id", userLanguageDetailsResult.getId());
 			languageObj.put("language", userLanguageDetailsResult.getLanguage().getId());
 			languageObj.put("proficiency", userLanguageDetailsResult.getProficiency().getId());
-			languageArr.add(languageObj);
+			languageArr.add(languageObj); 
 		}
-
-		regResult.put("userId", userPersonalDetailsResult.getUser().getId());
+		System.out.println("userPersonalDetailsResult>>>>>>>>>" +userPersonalDetailsResult);
+		if (userPersonalDetailsResult != null)
+		{
+		regResult.put("userId", userPersonalDetailsResult.getUser().getId());		
 		regResult.put("name", userPersonalDetailsResult.getName());
 		regResult.put("surName", userPersonalDetailsResult.getSurname());
 		regResult.put("address", userPersonalDetailsResult.getAddress());
@@ -287,7 +298,7 @@ public class RegisterServiceImpl implements RegisterService {
 		regResult.put("twitter", userPersonalDetailsResult.getTwitter());
 		regResult.put("skypeAddress", userPersonalDetailsResult.getSkype());
 		regResult.put("language", languageArr);
-		// regResult.put("PersonalDetails", userPersonalDetailsResult);
+		}
 		regResult.put("message", "Personal details Retrieved");
 		regResult.put("responseId", HttpStatus.CREATED);
 		regResult.put("responseStatus", "success");
@@ -399,7 +410,8 @@ public class RegisterServiceImpl implements RegisterService {
 		     /**/
 			
 		}
-		System.out.println("languageIterator>>>>>>>>>" + languageArr);
+		if (UserCompanyDetailResult != null)
+		{
 		regResult.put("userId", UserCompanyDetailResult.getUser().getId());
 		regResult.put("companyName", UserCompanyDetailResult.getName());
 		regResult.put("vatId", UserCompanyDetailResult.getVat());
@@ -411,6 +423,7 @@ public class RegisterServiceImpl implements RegisterService {
 		regResult.put("twitter", UserCompanyDetailResult.getTwitter());
 		regResult.put("skypeAddress", UserCompanyDetailResult.getSkype());
 		regResult.put("language", languageArr);		
+		}
 		regResult.put("message", "Personal details Retrieved");
 		regResult.put("responseId", HttpStatus.CREATED);
 		regResult.put("responseStatus", "success"); 
