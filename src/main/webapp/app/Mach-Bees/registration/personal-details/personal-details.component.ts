@@ -71,7 +71,7 @@ export class PersonalDetailsComponent implements OnInit, AfterViewInit {
         if (response['responseStatus'] == 'failure') {
           this.processError(response);
         } else {
-          this.route.navigateByUrl('registration/ChooseSubscription');
+          this.route.navigateByUrl('registration/ChooseSubscription/' + userId);
         }
       }
     });

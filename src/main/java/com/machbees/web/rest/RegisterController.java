@@ -135,11 +135,17 @@ public class RegisterController {
 	}
 
 	// getSubscription
-	@GetMapping("/common/registration/subscription")
+	@GetMapping("/common/metadata/subscription")
 	public List<CategoryMetadata> getSubscription() throws JsonProcessingException {
 		List<CategoryMetadata> category = regService.findByCategoryName("SUBSCRIPTION");
 		System.out.println("category" + category);
-		return category;
+		return category; 
+	}
+	@GetMapping("/common/registration/subscription/{userId}")
+	public ResponseEntity<?> fetchSubscription(@PathVariable long userId) {
+		System.out.println("-inside-");
+		JSONObject personalDt = regService.fetchSubscription(userId);
+		return new ResponseEntity<JSONObject>(personalDt, HttpStatus.CREATED);
 	}
 
 	// setSubscription

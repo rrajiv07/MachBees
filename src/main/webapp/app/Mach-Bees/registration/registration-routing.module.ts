@@ -15,9 +15,9 @@ const routes: Routes = [
   { path: 'SelectProfile/:userId', component: SelectProfileComponent },
   { path: 'PersonalDetails/:userId', component: PersonalDetailsComponent },
   { path: 'CompanyDetails', component: CompanyDetailsComponent },
-  { path: 'ChooseSubscription', component: ChooseSubscriptionComponent },
+  { path: 'ChooseSubscription/:userId', component: ChooseSubscriptionComponent },
   { path: 'PaymentMethod', component: PaymentMethodComponent },
-  { path: 'ConfirmUser', component: ConfirmUserComponent },
+  { path: 'ConfirmUser/:userId', component: ConfirmUserComponent },
 ];
 
 @NgModule({

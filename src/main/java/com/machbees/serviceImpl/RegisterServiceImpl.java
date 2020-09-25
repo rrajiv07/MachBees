@@ -96,6 +96,13 @@ public class RegisterServiceImpl implements RegisterService {
 		return regResult;
 		
 	}
+	public JSONObject fetchSubscription(long userId) {
+		regResult.clear();
+		UserMaster userMaster = userRepo.findById(userId).get();
+		regResult.put("subscription", userMaster.getPaymentSubscription().getId());
+		return regResult;
+		
+	}
 	public JSONObject updateProfileCategory(UserProfileCategoryFromRequest profileCatDetails) {
 		regResult.clear();
 		if (checkUserIsCompletedByUserId(profileCatDetails.getUserId())) {
@@ -360,13 +367,7 @@ public class RegisterServiceImpl implements RegisterService {
 			regResult.put("responseId", HttpStatus.BAD_REQUEST);
 			regResult.put("responseStatus", "failure");
 		} else {
-			UserMaster userMaster = userRepo.findByIdAndStatus(setSubscription.getUserId(),
-					categoryRepo.getByCategoryCodeAndCategoryName("INPROGRESS", "USER_STATUS"));
-			if (userMaster != null) {
-				regResult.put("message", "Email Id already Registered.");
-				regResult.put("responseId", HttpStatus.BAD_REQUEST);
-				regResult.put("responseStatus", "failure");
-			} else {
+		
 				UserMaster user = userRepo.findById(setSubscription.getUserId()).get();
 				CategoryMetadata subscriptionCategory = categoryRepo.findById(setSubscription.getSubscription()).get();
 				if (subscriptionCategory == null) {
@@ -378,9 +379,9 @@ public class RegisterServiceImpl implements RegisterService {
 					userRepo.save(user);
 					regResult.put("responseStatus", "success");
 					regResult.put("message", "subscription details updated");
-					regResult.put("userId", user.getId());
+					regResult.put("userId", user.getId()); 
 				}
-			}
+			
 		}
 		return regResult;
 	}

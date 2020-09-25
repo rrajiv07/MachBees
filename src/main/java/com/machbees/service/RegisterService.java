@@ -36,5 +36,7 @@ public interface RegisterService {
 	public JSONObject fetchProfileType(long userId);
 
 	public JSONObject fetchProfileCategory(long userId);
+	
+	public JSONObject fetchSubscription(long userId);
 
 }

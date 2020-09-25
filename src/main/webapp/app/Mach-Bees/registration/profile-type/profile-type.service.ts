@@ -17,9 +17,6 @@ export class ProfileTypeService {
       .set('X-Requested-With', 'XMLHttpRequest');
     return this.http.post(SERVER_API_URL + 'api/common/registration/profileCategory', serviceInput, { headers: headers });
   }
-  back(): void {
-    this.routerLink.navigateByUrl('registration/SetEmailPassword');
-  }
   onload(): Observable<any> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
