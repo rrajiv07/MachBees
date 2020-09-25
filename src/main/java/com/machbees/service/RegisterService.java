@@ -27,6 +27,8 @@ public interface RegisterService {
 
 	public JSONObject getPersonaldetails(long userId);
 
+	public JSONObject getCompanydetails(long userId);
+	
 	public JSONObject setCompanydetails(UserCompanyDtFromRequest companydetails);
 
 	public JSONObject updateSubscription(UserSetSubcriptionFromRequest setSubscription);

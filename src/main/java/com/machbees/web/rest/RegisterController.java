@@ -130,7 +130,13 @@ public class RegisterController {
 	@PostMapping("/common/registration/companyDetails")
 	public ResponseEntity<?> setCompanydetails(@RequestBody UserCompanyDtFromRequest companydetails) {
 		System.out.println("-inside-");
-		JSONObject personalDt = regService.setCompanydetails(companydetails);
+		JSONObject companyDetails = regService.setCompanydetails(companydetails);
+		return new ResponseEntity<JSONObject>(companyDetails, HttpStatus.CREATED);
+	}
+	@GetMapping("/common/registration/companyDetails/{userId}")
+	public ResponseEntity<?> getCompanydetails(@PathVariable long userId) {
+		System.out.println("-inside-");
+		JSONObject personalDt = regService.getCompanydetails(userId);
 		return new ResponseEntity<JSONObject>(personalDt, HttpStatus.CREATED);
 	}
 

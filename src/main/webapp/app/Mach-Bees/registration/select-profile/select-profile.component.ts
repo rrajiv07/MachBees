@@ -34,7 +34,8 @@ export class SelectProfileComponent implements OnInit, AfterViewInit {
         if (response['responseStatus'] == 'failure') {
           this.processError(response);
         } else {
-          this.route.navigateByUrl('registration/PersonalDetails/' + userId);
+          if (response['profileCategory'] == 'Company') this.route.navigateByUrl('registration/CompanyDetails/' + userId);
+          else this.route.navigateByUrl('registration/PersonalDetails/' + userId);
         }
       }
     });

@@ -89,20 +89,23 @@ public class RegisterServiceImpl implements RegisterService {
 		List<CategoryMetadata> categoryMetadata = categoryRepo.findByCategoryName(categoryName);
 		return categoryMetadata;
 	}
+
 	public JSONObject fetchProfileCategory(long userId) {
 		regResult.clear();
 		UserMaster userMaster = userRepo.findById(userId).get();
 		regResult.put("profileCategory", userMaster.getProfileCategory().getId());
 		return regResult;
-		
+
 	}
+
 	public JSONObject fetchSubscription(long userId) {
 		regResult.clear();
 		UserMaster userMaster = userRepo.findById(userId).get();
 		regResult.put("subscription", userMaster.getPaymentSubscription().getId());
 		return regResult;
-		
+
 	}
+
 	public JSONObject updateProfileCategory(UserProfileCategoryFromRequest profileCatDetails) {
 		regResult.clear();
 		if (checkUserIsCompletedByUserId(profileCatDetails.getUserId())) {
@@ -131,15 +134,15 @@ public class RegisterServiceImpl implements RegisterService {
 	public List<ProfileMaster> findByprofileType() {
 		return profileRepo.findAll();
 	}
-	
+
 	public JSONObject fetchProfileType(long userId) {
 		regResult.clear();
 		UserMaster userMaster = userRepo.findById(userId).get();
 		regResult.put("profileType", userMaster.getProfile().getId());
 		return regResult;
-		
+
 	}
-	
+
 	@Override
 	public JSONObject updateProfileType(UserProfileTypeFromRequest profileTypeDetails) {
 		regResult.clear();
@@ -160,7 +163,8 @@ public class RegisterServiceImpl implements RegisterService {
 					userRepo.save(userMaster);
 					regResult.put("userId", userMaster.getId());
 					regResult.put("message", "User details Updated");
-					regResult.put("profileCategory", userMaster.getProfileCategory().getCategoryDescription().toString());
+					regResult.put("profileCategory",
+							userMaster.getProfileCategory().getCategoryDescription().toString());
 					regResult.put("responseId", HttpStatus.CREATED);
 					regResult.put("responseStatus", "success");
 				}
@@ -180,7 +184,7 @@ public class RegisterServiceImpl implements RegisterService {
 			regResult.put("message", "Your Registration is under verification");
 			regResult.put("responseId", HttpStatus.BAD_REQUEST);
 			regResult.put("responseStatus", "failure");
-		} else if ((personaldtReq.getLanguage() == null) || (personaldtReq.getLanguage().isEmpty()) ) {
+		} else if ((personaldtReq.getLanguage() == null) || (personaldtReq.getLanguage().isEmpty())) {
 			regResult.put("message", "Please enter language details");
 			regResult.put("responseId", HttpStatus.BAD_REQUEST);
 			regResult.put("responseStatus", "failure");
@@ -206,63 +210,52 @@ public class RegisterServiceImpl implements RegisterService {
 			personaldetails.setTwitter(personaldtReq.getTwitter());
 
 			// save langAndProficiency
-			Boolean errorFlag= true;
+			Boolean errorFlag = true;
 			for (UserLanguageAndProficiency langAndProfRequest : personaldtReq.getLanguage()) {
 				errorFlag = true;
-				if (langAndProfRequest.getLanguage() ==0)
-				{
+				if (langAndProfRequest.getLanguage() == 0) {
 					regResult.put("message", "Please select language");
 					regResult.put("responseId", HttpStatus.BAD_REQUEST);
 					regResult.put("responseStatus", "failure");
-					
-				}
-				else if (langAndProfRequest.getProficiency() ==0)
-				{
+
+				} else if (langAndProfRequest.getProficiency() == 0) {
 					regResult.put("message", "Please select proficiency");
 					regResult.put("responseId", HttpStatus.BAD_REQUEST);
 					regResult.put("responseStatus", "failure");
-					
-				}
-				else if ((categoryRepo.findById(langAndProfRequest.getLanguage()) == null)) {
+
+				} else if ((categoryRepo.findById(langAndProfRequest.getLanguage()) == null)) {
 					regResult.put("message", "Please select valid language");
 					regResult.put("responseId", HttpStatus.BAD_REQUEST);
 					regResult.put("responseStatus", "failure");
-				}
-				else if ((categoryRepo.findById(langAndProfRequest.getProficiency()) == null)) {
+				} else if ((categoryRepo.findById(langAndProfRequest.getProficiency()) == null)) {
 					regResult.put("message", "please select valid proficiency");
 					regResult.put("responseId", HttpStatus.BAD_REQUEST);
 					regResult.put("responseStatus", "failure");
-				}
-				else
-				{
-					errorFlag =false;
+				} else {
+					errorFlag = false;
 				}
 			}
-			
-			if (!errorFlag) 			{
-			for (UserLanguageAndProficiency langAndProfRequest : personaldtReq.getLanguage()) {
-				
-				UserLanguageDetails llp;
-				if (langAndProfRequest.getId() ==0)
-				{
-					llp = new UserLanguageDetails();
-				} 
-				else 
-				{
-					llp= langAndProfRepo.findById(langAndProfRequest.getId());
-				}
+
+			if (!errorFlag) {
+				for (UserLanguageAndProficiency langAndProfRequest : personaldtReq.getLanguage()) {
+
+					UserLanguageDetails llp;
+					if (langAndProfRequest.getId() == 0) {
+						llp = new UserLanguageDetails();
+					} else {
+						llp = langAndProfRepo.findById(langAndProfRequest.getId());
+					}
 					llp.setUser(userMaster);
-				
-				
+
 					llp.setLanguage(categoryRepo.findById(langAndProfRequest.getLanguage()).get());
-					llp.setProficiency(categoryRepo.findById(langAndProfRequest.getProficiency()).get()); 
+					llp.setProficiency(categoryRepo.findById(langAndProfRequest.getProficiency()).get());
 					personalDtRepo.save(personaldetails);
 					langAndProfRepo.save(llp);
 					regResult.put("message", "Personal details Inserted");
 					regResult.put("responseStatus", "success");
 					regResult.put("userId", userMaster.getId());
-				
-			}
+
+				}
 			}
 		}
 		return regResult;
@@ -274,17 +267,16 @@ public class RegisterServiceImpl implements RegisterService {
 		UserPersonalDetails userPersonalDetailsResult = personalDtRepo.findByUserId(userId);
 		ArrayList languageArr = new ArrayList();
 		Iterator languageIterator = langAndProfRepo.findByUserId(userId).iterator();
-		
-		while(languageIterator.hasNext()) {
-		     UserLanguageDetails userLanguageDetailsResult = (UserLanguageDetails) languageIterator.next();
-		     JSONObject languageObj = new JSONObject();
-		     languageObj.put("id", userLanguageDetailsResult.getId());
-		     languageObj.put("language", userLanguageDetailsResult.getLanguage().getId());
-		     languageObj.put("proficiency", userLanguageDetailsResult.getProficiency().getId());
-		     languageArr.add(languageObj);
+
+		while (languageIterator.hasNext()) {
+			UserLanguageDetails userLanguageDetailsResult = (UserLanguageDetails) languageIterator.next();
+			JSONObject languageObj = new JSONObject();
+			languageObj.put("id", userLanguageDetailsResult.getId());
+			languageObj.put("language", userLanguageDetailsResult.getLanguage().getId());
+			languageObj.put("proficiency", userLanguageDetailsResult.getProficiency().getId());
+			languageArr.add(languageObj);
 		}
-		
-		 
+
 		regResult.put("userId", userPersonalDetailsResult.getUser().getId());
 		regResult.put("name", userPersonalDetailsResult.getName());
 		regResult.put("surName", userPersonalDetailsResult.getSurname());
@@ -294,11 +286,11 @@ public class RegisterServiceImpl implements RegisterService {
 		regResult.put("linkedIn", userPersonalDetailsResult.getLinkedin());
 		regResult.put("twitter", userPersonalDetailsResult.getTwitter());
 		regResult.put("skypeAddress", userPersonalDetailsResult.getSkype());
-		regResult.put("language", languageArr);		
-		//regResult.put("PersonalDetails", userPersonalDetailsResult);
+		regResult.put("language", languageArr);
+		// regResult.put("PersonalDetails", userPersonalDetailsResult);
 		regResult.put("message", "Personal details Retrieved");
 		regResult.put("responseId", HttpStatus.CREATED);
-		regResult.put("responseStatus", "success"); 
+		regResult.put("responseStatus", "success");
 		return regResult;
 	}
 
@@ -309,7 +301,7 @@ public class RegisterServiceImpl implements RegisterService {
 			regResult.put("message", "Your Registration is under verification");
 			regResult.put("responseId", HttpStatus.BAD_REQUEST);
 			regResult.put("responseStatus", "failure");
-		} else if (companydtReq.getLanguage() == null) {
+		} else if ((companydtReq.getLanguage() == null) || companydtReq.getLanguage().isEmpty()) {
 			regResult.put("message", "Please enter language details");
 			regResult.put("responseId", HttpStatus.BAD_REQUEST);
 			regResult.put("responseStatus", "failure");
@@ -329,7 +321,6 @@ public class RegisterServiceImpl implements RegisterService {
 			companydetails.setWebsite(companydtReq.getWebsite());
 			companydetails.setDescription(companydtReq.getDescription());
 			companydetails.setAddress(companydtReq.getAddress());
-			// companydetails.set(companydtReq.getLinkedIn());
 			companydetails.setMobile(companydtReq.getMobile());
 			companydetails.setLinkedin(companydtReq.getLinkedIn());
 			companydetails.setTwitter(companydtReq.getTwitter());
@@ -337,15 +328,44 @@ public class RegisterServiceImpl implements RegisterService {
 			companyDtRepo.save(companydetails);
 
 			// save langAndProficiency
+			Boolean errorFlag = true;
 			for (UserLanguageAndProficiency langAndProfRequest : companydtReq.getLanguage()) {
-				UserLanguageDetails llp = new UserLanguageDetails();
-				llp.setUser(userMaster);
-				if ((categoryRepo.findById(langAndProfRequest.getLanguage()) == null)
-						|| (categoryRepo.findById(langAndProfRequest.getProficiency()) == null)) {
-					regResult.put("message", "please select valid Language/Proficiency category");
+				errorFlag = true;
+				if (langAndProfRequest.getLanguage() == 0) {
+					regResult.put("message", "Please select language");
+					regResult.put("responseId", HttpStatus.BAD_REQUEST);
+					regResult.put("responseStatus", "failure");
+
+				} else if (langAndProfRequest.getProficiency() == 0) {
+					regResult.put("message", "Please select proficiency");
+					regResult.put("responseId", HttpStatus.BAD_REQUEST);
+					regResult.put("responseStatus", "failure");
+
+				} else if ((categoryRepo.findById(langAndProfRequest.getLanguage()) == null)) {
+					regResult.put("message", "Please select valid language");
+					regResult.put("responseId", HttpStatus.BAD_REQUEST);
+					regResult.put("responseStatus", "failure");
+				} else if ((categoryRepo.findById(langAndProfRequest.getProficiency()) == null)) {
+					regResult.put("message", "please select valid proficiency");
 					regResult.put("responseId", HttpStatus.BAD_REQUEST);
 					regResult.put("responseStatus", "failure");
 				} else {
+					errorFlag = false;
+				}
+			}
+			if (!errorFlag) {
+				for (UserLanguageAndProficiency langAndProfRequest : companydtReq.getLanguage()) {
+					//UserLanguageDetails llp = new UserLanguageDetails();
+					UserLanguageDetails llp;
+					if (langAndProfRequest.getId() ==0)
+					{
+						llp = new UserLanguageDetails();
+					} 
+					else 
+					{
+						llp= langAndProfRepo.findById(langAndProfRequest.getId());
+					}
+					llp.setUser(userMaster);
 					llp.setLanguage(categoryRepo.findById(langAndProfRequest.getLanguage()).get());
 					llp.setProficiency(categoryRepo.findById(langAndProfRequest.getProficiency()).get());
 					companyDtRepo.save(companydetails);
@@ -360,6 +380,43 @@ public class RegisterServiceImpl implements RegisterService {
 	}
 
 	@Override
+	public JSONObject getCompanydetails(long userId) {
+		regResult.clear();
+		UserCompanyDetails UserCompanyDetailResult = companyDtRepo.findByUserId(userId);
+		
+		
+		ArrayList languageArr = new ArrayList();
+		Iterator languageIterator = langAndProfRepo.findByUserId(userId).iterator();
+		
+		while(languageIterator.hasNext()) {
+			
+		     UserLanguageDetails userLanguageDetailsResult = (UserLanguageDetails) languageIterator.next();
+		     JSONObject languageObj = new JSONObject();
+		     languageObj.put("id", userLanguageDetailsResult.getId());
+		     languageObj.put("language", userLanguageDetailsResult.getLanguage().getId());
+		     languageObj.put("proficiency", userLanguageDetailsResult.getProficiency().getId());
+		     languageArr.add(languageObj);  
+		     /**/
+			
+		}
+		System.out.println("languageIterator>>>>>>>>>" + languageArr);
+		regResult.put("userId", UserCompanyDetailResult.getUser().getId());
+		regResult.put("companyName", UserCompanyDetailResult.getName());
+		regResult.put("vatId", UserCompanyDetailResult.getVat());
+		regResult.put("website", UserCompanyDetailResult.getWebsite());
+		regResult.put("description", UserCompanyDetailResult.getDescription());
+		regResult.put("address", UserCompanyDetailResult.getAddress());
+		regResult.put("mobile", UserCompanyDetailResult.getMobile());
+		regResult.put("linkedIn", UserCompanyDetailResult.getLinkedin());
+		regResult.put("twitter", UserCompanyDetailResult.getTwitter());
+		regResult.put("skypeAddress", UserCompanyDetailResult.getSkype());
+		regResult.put("language", languageArr);		
+		regResult.put("message", "Personal details Retrieved");
+		regResult.put("responseId", HttpStatus.CREATED);
+		regResult.put("responseStatus", "success"); 
+		return regResult;
+	}
+	@Override
 	public JSONObject updateSubscription(UserSetSubcriptionFromRequest setSubscription) {
 		regResult.clear();
 		if (checkUserIsCompletedByUserId(setSubscription.getUserId())) {
@@ -367,21 +424,21 @@ public class RegisterServiceImpl implements RegisterService {
 			regResult.put("responseId", HttpStatus.BAD_REQUEST);
 			regResult.put("responseStatus", "failure");
 		} else {
-		
-				UserMaster user = userRepo.findById(setSubscription.getUserId()).get();
-				CategoryMetadata subscriptionCategory = categoryRepo.findById(setSubscription.getSubscription()).get();
-				if (subscriptionCategory == null) {
-					regResult.put("message", "please select valid Subscription");
-					regResult.put("responseStatus", "failure");
-					regResult.put("responseId", HttpStatus.BAD_REQUEST);
-				} else {
-					user.setPaymentSubscription(subscriptionCategory);
-					userRepo.save(user);
-					regResult.put("responseStatus", "success");
-					regResult.put("message", "subscription details updated");
-					regResult.put("userId", user.getId()); 
-				}
-			
+
+			UserMaster user = userRepo.findById(setSubscription.getUserId()).get();
+			CategoryMetadata subscriptionCategory = categoryRepo.findById(setSubscription.getSubscription()).get();
+			if (subscriptionCategory == null) {
+				regResult.put("message", "please select valid Subscription");
+				regResult.put("responseStatus", "failure");
+				regResult.put("responseId", HttpStatus.BAD_REQUEST);
+			} else {
+				user.setPaymentSubscription(subscriptionCategory);
+				userRepo.save(user);
+				regResult.put("responseStatus", "success");
+				regResult.put("message", "subscription details updated");
+				regResult.put("userId", user.getId());
+			}
+
 		}
 		return regResult;
 	}

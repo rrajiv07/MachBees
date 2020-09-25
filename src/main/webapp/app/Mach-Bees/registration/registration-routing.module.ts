@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'ProfileType/:userId', component: ProfileTypeComponent },
   { path: 'SelectProfile/:userId', component: SelectProfileComponent },
   { path: 'PersonalDetails/:userId', component: PersonalDetailsComponent },
-  { path: 'CompanyDetails', component: CompanyDetailsComponent },
+  { path: 'CompanyDetails/:userId', component: CompanyDetailsComponent },
   { path: 'ChooseSubscription/:userId', component: ChooseSubscriptionComponent },
   { path: 'PaymentMethod', component: PaymentMethodComponent },
   { path: 'ConfirmUser/:userId', component: ConfirmUserComponent },

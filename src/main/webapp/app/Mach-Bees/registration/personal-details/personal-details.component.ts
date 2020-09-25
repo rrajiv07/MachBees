@@ -42,7 +42,7 @@ export class PersonalDetailsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {}
   save(): void {
-    //this.isSaving = true;
+    this.isSaving = true;
     const serviceInput = {};
     const userId = this.editForm.get(['userId'])!.value;
     const name = this.editForm.get(['name'])!.value;

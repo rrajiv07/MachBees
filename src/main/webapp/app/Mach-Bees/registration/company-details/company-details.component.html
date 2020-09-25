@@ -1,1 +1,238 @@
-<p>company-details works!</p>
+<div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <h2 id="jhi-personal-details-heading">Company Details</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+
+        <div class="col-md-4">
+            <form name="form" role="form">
+                <div class="form-group">
+                    <input type="text" readonly class="form-control" value="Set email & password">
+                </div>
+                <div class="form-group">
+                    <input type="text" readonly class="form-control" value="Type of profile">
+                </div>
+                <div class="form-group">
+                    <input type="text" readonly class="form-control" value="Select profile">
+                </div>
+                <div class="form-group">
+                    <input type="text" style="background: #82B3DE;color: #fff;font-weight: bold;" readonly
+                        class="form-control" value="Company details">
+                </div>
+                <div class="form-group">
+                    <input type="text" readonly class="form-control" value="Choose subscription">
+                </div>
+                <div class="form-group">
+                    <input type="text" readonly class="form-control" value="Payment method">
+                </div>
+                <div class="form-group">
+                    <input type="text" readonly class="form-control" value="Confirm">
+                </div>
+            </form>
+        </div>
+        <div class="col-6" style="background: white;border: 1px solid #82B3DE;margin:2px;">
+            <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+
+
+                <div>
+                    <jhi-alert-error></jhi-alert-error>
+
+                    <div class="form-group">
+                        <label for="userId">User Id</label>
+                        <input type="text" class="form-control" id="userId" name="userId" formControlName="userId"
+                            readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_name">Company Name</label>
+                        <input type="text" class="form-control" name="companyName" id="field_companyName" formControlName="companyName" />
+                        <div
+                            *ngIf="editForm.get('companyName')!.invalid && (editForm.get('companyName')!.dirty || editForm.get('companyName')!.touched)">
+                            <small class="form-text text-danger" *ngIf="editForm.get('companyName')?.errors?.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="editForm.get('companyName')?.errors?.maxlength">
+                                This field cannot be longer than 40 characters.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_surName">VAT Id</label>
+                        <input type="text" class="form-control" name="vatId" id="field_vatId"
+                            formControlName="vatId" />
+                        <div
+                            *ngIf="editForm.get('vatId')!.invalid && (editForm.get('vatId')!.dirty || editForm.get('vatId')!.touched)">
+                            <small class="form-text text-danger" *ngIf="editForm.get('vatId')?.errors?.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="editForm.get('vatId')?.errors?.maxlength">
+                                This field cannot be longer than 40 characters.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_website">Website</label>
+                        <input type="text" class="form-control" name="website" id="field_website"
+                            formControlName="website" />
+                        <div
+                            *ngIf="editForm.get('website')!.invalid && (editForm.get('website')!.dirty || editForm.get('website')!.touched)">
+                            
+                            <small class="form-text text-danger" *ngIf="editForm.get('website')?.errors?.maxlength">
+                                This field cannot be longer than 20 characters.
+                            </small>
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_description">Description</label>
+                        <input type="text" class="form-control" name="description" id="field_description"
+                            formControlName="description" />
+                        <div
+                            *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+                            
+                            <small class="form-text text-danger" *ngIf="editForm.get('description')?.errors?.maxlength">
+                                This field cannot be longer than 100 characters.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_address">Address</label>
+                        <input type="text" class="form-control" name="address" id="field_address"
+                            formControlName="address" />
+                        <div
+                            *ngIf="editForm.get('address')!.invalid && (editForm.get('address')!.dirty || editForm.get('address')!.touched)">
+                            <small class="form-text text-danger" *ngIf="editForm.get('address')?.errors?.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="editForm.get('address')?.errors?.maxlength">
+                                This field cannot be longer than 80 characters.
+                            </small>
+                        </div>
+                    </div>
+
+                       <div class="form-group">
+                        <label class="form-control-label" for="field_mobile">Mobile</label>
+                        <input type="text" class="form-control" name="mobile" id="field_mobile"
+                            formControlName="mobile" />
+                        <div
+                            *ngIf="editForm.get('mobile')!.invalid && (editForm.get('mobile')!.dirty || editForm.get('mobile')!.touched)">
+                            <small class="form-text text-danger" *ngIf="editForm.get('mobile')?.errors?.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="editForm.get('mobile')?.errors?.maxlength">
+                                This field cannot be longer than 40 characters.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_linkedIn">LinkedIn</label>
+                        <input type="text" class="form-control" name="linkedIn" id="field_linkedIn"
+                            formControlName="linkedIn" />
+                        <div
+                            *ngIf="editForm.get('linkedIn')!.invalid && (editForm.get('linkedIn')!.dirty || editForm.get('linkedIn')!.touched)">
+
+                            <small class="form-text text-danger" *ngIf="editForm.get('linkedIn')?.errors?.maxlength">
+                                This field cannot be longer than 40 characters.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_twitter">Twitter</label>
+                        <input type="text" class="form-control" name="twitter" id="field_twitter"
+                            formControlName="twitter" />
+                        <div
+                            *ngIf="editForm.get('twitter')!.invalid && (editForm.get('twitter')!.dirty || editForm.get('twitter')!.touched)">
+
+                            <small class="form-text text-danger" *ngIf="editForm.get('twitter')?.errors?.maxlength">
+                                This field cannot be longer than 40 characters.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_skypeAddress">Skype Address</label>
+                        <input type="text" class="form-control" name="skypeAddress" id="field_skypeAddress"
+                            formControlName="skypeAddress" />
+                        <div
+                            *ngIf="editForm.get('skypeAddress')!.invalid && (editForm.get('skypeAddress')!.dirty || editForm.get('skypeAddress')!.touched)">
+
+                            <small class="form-text text-danger"
+                                *ngIf="editForm.get('skypeAddress')?.errors?.maxlength">
+                                This field cannot be longer than 40 characters.
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+            <div class="card">
+                <h5>Language Details</h5>
+
+                <p-table [value]="language">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex">
+                            <button  type="button" class="btn btn-primary btn-brand-icon btn-brand-sm" 
+                            (click)="gridAdd()"
+                            data-title="Add">
+                            <i class="material-icons">add</i>
+                        </button> 
+                        <button  type="button" class="btn btn-primary btn-brand-icon btn-brand-sm" 
+                            (click)="gridDelete()"
+                            data-title="Delete">
+                            <i class="material-icons">delete</i>
+                        </button>                
+                           </div> 
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>#</th>
+                            <th><input type="checkbox"/></th>
+                            <th>Language</th>
+                            <th>Proficiency</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-gval let-rowIndex="rowIndex">
+                        <tr>
+                            <td style="width: 3em;text-align: center;">
+                                {{rowIndex+1}}
+                            </td>
+                            <td>
+                                <input type="checkbox" (click)="griddtlCheckboxClick($event,gval)"/>
+                            </td>
+                            <td>
+                                <ng-select [items]="languagemasters" bindLabel="categoryDescription" bindValue="id"
+                                    appendTo="body" [clearable]="false" [(ngModel)]="gval.language">
+                                </ng-select> 
+                            </td>
+                            <td>
+                                <ng-select [items]="proficiencymasters" bindLabel="categoryDescription" bindValue="id"
+                                    appendTo="body" [clearable]="false" [(ngModel)]="gval.proficiency">
+                                </ng-select>
+
+                            </td>
+
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div style="padding-bottom: 5px;">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Back</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                (click)="save()"
+                    class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
