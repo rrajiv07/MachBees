@@ -16,9 +16,9 @@ export class SetEmailPasswordComponent implements OnInit, AfterViewInit {
   success = false;
 
   registerForm = this.fb.group({
-    emailId: ['abc@gmail.com', [Validators.required, Validators.minLength(5), Validators.maxLength(40), Validators.email]],
-    password: ['12345678', [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
-    confirmPassword: ['12345678', [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
+    emailId: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(40), Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
   });
   constructor(private fb: FormBuilder, private service: SetEmailPasswordService, private route: Router) {}
 
