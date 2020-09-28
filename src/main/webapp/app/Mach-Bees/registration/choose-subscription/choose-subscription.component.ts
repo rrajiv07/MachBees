@@ -55,7 +55,8 @@ export class ChooseSubscriptionComponent implements OnInit, AfterViewInit {
         if (response['responseStatus'] == 'failure') {
           this.processError(response);
         } else {
-          this.route.navigateByUrl('registration/ConfirmUser/' + userId);
+          if (response['profileCategory'] == 'Company') this.route.navigateByUrl('registration/ConfirmCompanyDetails/' + userId);
+          else this.route.navigateByUrl('registration/ConfirmPersonalDetails/' + userId);
         }
       }
     });

@@ -7,7 +7,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 @Injectable({
   providedIn: 'root',
 })
-export class ConfirmUserService {
+export class ConfirmCompanyDetailsService {
   constructor(private http: HttpClient, private routerLink: Router) {}
   save(serviceInput: any): Observable<{}> {
     const headers = new HttpHeaders()
@@ -40,6 +40,6 @@ export class ConfirmUserService {
       .set('Accept', '*/*')
       .set('Authorization', 'Bearer ' + localStorage.getItem('JWT_TOKEN'))
       .set('X-Requested-With', 'XMLHttpRequest');
-    return this.http.get(SERVER_API_URL + 'api/common/registration/confirm/personalDetails/' + userId, { headers: headers });
+    return this.http.get(SERVER_API_URL + 'api/common/registration/confirm/companyDetails/' + userId, { headers: headers });
   }
 }

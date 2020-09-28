@@ -14,6 +14,7 @@ import { ChooseSubscriptionComponent } from './choose-subscription/choose-subscr
 import { PaymentMethodComponent } from './payment-method/payment-method.component';
 import { ConfirmUserComponent } from './confirm-user/confirm-user.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ConfirmCompanyDetailsComponent } from './confirm-company-details/confirm-company-details.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ChooseSubscriptionComponent,
     PaymentMethodComponent,
     ConfirmUserComponent,
+    ConfirmCompanyDetailsComponent,
   ],
   imports: [CommonModule, RegistrationRoutingModule, MachBeesSharedModule, TableModule, NgSelectModule, DropdownModule],
 })
