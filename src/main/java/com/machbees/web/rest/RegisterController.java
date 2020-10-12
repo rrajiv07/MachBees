@@ -44,11 +44,15 @@ public class RegisterController {
 	@PostMapping(value = "/common/registration/setEmailPassword")
 	@PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
 	public ResponseEntity<?> setEmailPassword(@Valid @RequestBody UserDetailsFromRequest userdetails) {
-
-		if ((userdetails.getEmailId() == null) || (userdetails.getPassword() == null)) {
-			throw new BadRequestAlertException("EmailId/Pasword cannot be null", ENTITY_NAME, "null value");
+		JSONObject userResult = null;
+		if (userdetails != null) {
+			if ((userdetails.getEmailId() == null) || (userdetails.getPassword() == null)) {
+				throw new BadRequestAlertException("EmailId/Pasword cannot be null", ENTITY_NAME, "null value");
+			}
+			userResult = regService.setEmailPassword(userdetails.getEmailId(), userdetails.getPassword());
+		} else {
+			userResult.put("message", "Invalid Input");
 		}
-		JSONObject userResult = regService.setEmailPassword(userdetails.getEmailId(), userdetails.getPassword());
 		return new ResponseEntity<JSONObject>(userResult, HttpStatus.CREATED);
 	}
 
@@ -59,12 +63,14 @@ public class RegisterController {
 		System.out.println("category" + category);
 		return category;
 	}
+
 	@GetMapping("/common/registration/profileCategory/{userId}")
 	public ResponseEntity<?> fetchProfileCategory(@PathVariable long userId) {
 		System.out.println("-inside-");
 		JSONObject personalDt = regService.fetchProfileCategory(userId);
 		return new ResponseEntity<JSONObject>(personalDt, HttpStatus.CREATED);
 	}
+
 	// setProfileCategory
 	@PostMapping("/common/registration/profileCategory")
 	public ResponseEntity<?> updateProfilecategory(@RequestBody UserProfileCategoryFromRequest profileCatDetails) {
@@ -80,12 +86,14 @@ public class RegisterController {
 		System.out.println("profile" + profile);
 		return profile;
 	}
+
 	@GetMapping("/common/registration/profileType/{userId}")
 	public ResponseEntity<?> fetchProfileType(@PathVariable long userId) {
 		System.out.println("-inside-");
 		JSONObject personalDt = regService.fetchProfileType(userId);
 		return new ResponseEntity<JSONObject>(personalDt, HttpStatus.CREATED);
 	}
+
 	// setprofileType
 	@PostMapping("/common/registration/profileType")
 	public ResponseEntity<?> setprofileType(@RequestBody UserProfileTypeFromRequest profiletype) {
@@ -133,6 +141,7 @@ public class RegisterController {
 		JSONObject companyDetails = regService.setCompanydetails(companydetails);
 		return new ResponseEntity<JSONObject>(companyDetails, HttpStatus.CREATED);
 	}
+
 	@GetMapping("/common/registration/companyDetails/{userId}")
 	public ResponseEntity<?> getCompanydetails(@PathVariable long userId) {
 		System.out.println("-inside-");
@@ -145,8 +154,9 @@ public class RegisterController {
 	public List<CategoryMetadata> getSubscription() throws JsonProcessingException {
 		List<CategoryMetadata> category = regService.findByCategoryName("SUBSCRIPTION");
 		System.out.println("category" + category);
-		return category; 
+		return category;
 	}
+
 	@GetMapping("/common/registration/subscription/{userId}")
 	public ResponseEntity<?> fetchSubscription(@PathVariable long userId) {
 		System.out.println("-inside-");
@@ -161,6 +171,7 @@ public class RegisterController {
 		JSONObject usersubscriptionResult = regService.updateSubscription(setSubscription);
 		return new ResponseEntity<JSONObject>(usersubscriptionResult, HttpStatus.CREATED);
 	}
+
 	// setConfirm
 	@PostMapping("/common/registration/confirm")
 	public ResponseEntity<?> setConfirm(@RequestBody int userId) {

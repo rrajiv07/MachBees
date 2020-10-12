@@ -30,8 +30,6 @@ import com.machbees.service.dto.UserProfileCategoryFromRequest;
 import com.machbees.service.dto.UserProfileTypeFromRequest;
 import com.machbees.service.dto.UserSetSubcriptionFromRequest;
 
-import net.minidev.json.JSONArray;
-
 @Service
 @Transactional
 public class RegisterServiceImpl implements RegisterService {

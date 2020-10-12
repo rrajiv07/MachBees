@@ -1,10 +1,10 @@
 package com.machbees.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import com.machbees.domain.CategoryMetadata;
 import com.machbees.domain.UserMaster;
-
-import org.springframework.data.jpa.repository.*;
-import org.springframework.stereotype.Repository;
 
 /**
  * Spring Data repository for the UserMaster entity.
