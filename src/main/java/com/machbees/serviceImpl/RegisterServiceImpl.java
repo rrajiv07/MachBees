@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.machbees.domain.CategoryMetadata;
 import com.machbees.domain.ProfileMaster;
 import com.machbees.domain.UserCompanyDetails;
-import com.machbees.domain.UserLanguageDetails;
+import com.machbees.domain.UserLanguageDetails; 
 import com.machbees.domain.UserMaster;
 import com.machbees.domain.UserPersonalDetails;
 import com.machbees.repository.CategoryMetadataRepository;
@@ -29,6 +29,7 @@ import com.machbees.service.dto.UserPersonalDtFromRequest;
 import com.machbees.service.dto.UserProfileCategoryFromRequest;
 import com.machbees.service.dto.UserProfileTypeFromRequest;
 import com.machbees.service.dto.UserSetSubcriptionFromRequest;
+import com.machbees.service.dto.UserConfirmRequest;
 
 @Service
 @Transactional
@@ -294,9 +295,9 @@ public class RegisterServiceImpl implements RegisterService {
 		regResult.put("mobile", userPersonalDetailsResult.getMobile());
 		regResult.put("linkedIn", userPersonalDetailsResult.getLinkedin());
 		regResult.put("twitter", userPersonalDetailsResult.getTwitter());
-		regResult.put("skypeAddress", userPersonalDetailsResult.getSkype());
-		regResult.put("language", languageArr);
+		regResult.put("skypeAddress", userPersonalDetailsResult.getSkype());		
 		}
+		regResult.put("language", languageArr);
 		regResult.put("message", "Personal details Retrieved");
 		regResult.put("responseId", HttpStatus.CREATED);
 		regResult.put("responseStatus", "success");
@@ -419,9 +420,9 @@ public class RegisterServiceImpl implements RegisterService {
 		regResult.put("mobile", UserCompanyDetailResult.getMobile());
 		regResult.put("linkedIn", UserCompanyDetailResult.getLinkedin());
 		regResult.put("twitter", UserCompanyDetailResult.getTwitter());
-		regResult.put("skypeAddress", UserCompanyDetailResult.getSkype());
-		regResult.put("language", languageArr);		
+		regResult.put("skypeAddress", UserCompanyDetailResult.getSkype());			
 		}
+		regResult.put("language", languageArr);	
 		regResult.put("message", "Personal details Retrieved");
 		regResult.put("responseId", HttpStatus.CREATED);
 		regResult.put("responseStatus", "success"); 
@@ -448,35 +449,118 @@ public class RegisterServiceImpl implements RegisterService {
 				regResult.put("responseStatus", "success");
 				regResult.put("message", "subscription details updated");
 				regResult.put("userId", user.getId());
+				regResult.put("profileCategory",
+						user.getProfileCategory().getCategoryDescription().toString());
 			}
 
 		}
 		return regResult;
 	}
-
+	
 	@Override
-	public JSONObject updateConfirm(int userId) {
+	public JSONObject getConfirmPersonaldetails(long userId) {
 		regResult.clear();
-		if (checkUserIsCompletedByUserId(userId)) {
+		UserPersonalDetails userPersonalDetailsResult = personalDtRepo.findByUserId(userId);
+		ArrayList languageArr = new ArrayList();
+		Iterator languageIterator = langAndProfRepo.findByUserId(userId).iterator();
+
+		while (languageIterator.hasNext()) {
+			UserLanguageDetails userLanguageDetailsResult = (UserLanguageDetails) languageIterator.next();
+			JSONObject languageObj = new JSONObject();
+			languageObj.put("id", userLanguageDetailsResult.getId());
+			languageObj.put("language", userLanguageDetailsResult.getLanguage().getId());
+			languageObj.put("proficiency", userLanguageDetailsResult.getProficiency().getId());
+			languageArr.add(languageObj); 
+		}
+		System.out.println("getConfirmPersonaldetails>>>>>>>>>" +userPersonalDetailsResult);
+		if (userPersonalDetailsResult != null)
+		{
+		UserMaster userMaster = userRepo.findById(userId).get();
+			
+		regResult.put("userId", userPersonalDetailsResult.getUser().getId());	
+		regResult.put("profileType", userMaster.getProfile().getProfileDescription());	
+		regResult.put("name", userPersonalDetailsResult.getName());
+		regResult.put("emailId", userMaster.getEmailId());	
+		regResult.put("surName", userPersonalDetailsResult.getSurname());
+		regResult.put("address", userPersonalDetailsResult.getAddress());
+		regResult.put("country", userPersonalDetailsResult.getCountry());
+		regResult.put("mobile", userPersonalDetailsResult.getMobile());
+		regResult.put("linkedIn", userPersonalDetailsResult.getLinkedin());
+		regResult.put("twitter", userPersonalDetailsResult.getTwitter());
+		regResult.put("skypeAddress", userPersonalDetailsResult.getSkype());		
+		}
+		regResult.put("language", languageArr);
+		regResult.put("message", "Personal details Retrieved");
+		regResult.put("responseId", HttpStatus.CREATED);
+		regResult.put("responseStatus", "success");
+		return regResult;
+	}
+	
+	@Override
+	public JSONObject getConfirmCompanydetails(long userId) {
+		regResult.clear();
+		UserCompanyDetails UserCompanyDetailResult = companyDtRepo.findByUserId(userId);
+		
+		
+		ArrayList languageArr = new ArrayList();
+		Iterator languageIterator = langAndProfRepo.findByUserId(userId).iterator();
+		
+		while(languageIterator.hasNext()) {
+			
+		     UserLanguageDetails userLanguageDetailsResult = (UserLanguageDetails) languageIterator.next();
+		     JSONObject languageObj = new JSONObject();
+		     languageObj.put("id", userLanguageDetailsResult.getId());
+		     languageObj.put("language", userLanguageDetailsResult.getLanguage().getId());
+		     languageObj.put("proficiency", userLanguageDetailsResult.getProficiency().getId());
+		     languageArr.add(languageObj);  
+		     /**/
+			
+		}
+		if (UserCompanyDetailResult != null)
+		{
+		UserMaster userMaster = userRepo.findById(userId).get();
+			
+		regResult.put("userId", UserCompanyDetailResult.getUser().getId());
+		regResult.put("profileType", userMaster.getProfile().getProfileDescription());	
+		regResult.put("emailId", userMaster.getEmailId());	
+		regResult.put("companyName", UserCompanyDetailResult.getName());
+		regResult.put("vatId", UserCompanyDetailResult.getVat());
+		regResult.put("website", UserCompanyDetailResult.getWebsite());
+		regResult.put("description", UserCompanyDetailResult.getDescription());
+		regResult.put("address", UserCompanyDetailResult.getAddress());
+		regResult.put("mobile", UserCompanyDetailResult.getMobile());
+		regResult.put("linkedIn", UserCompanyDetailResult.getLinkedin());
+		regResult.put("twitter", UserCompanyDetailResult.getTwitter());
+		regResult.put("skypeAddress", UserCompanyDetailResult.getSkype());			
+		}
+		regResult.put("language", languageArr);	
+		regResult.put("message", "Personal details Retrieved");
+		regResult.put("responseId", HttpStatus.CREATED);
+		regResult.put("responseStatus", "success"); 
+		return regResult;
+	}
+	
+	@Override
+	public JSONObject updateConfirm(UserConfirmRequest confirmUser) {
+		regResult.clear();
+		if (checkUserIsCompletedByUserId(confirmUser.getUserId())) {
 			regResult.put("message", "Your Registration is under verification");
 			regResult.put("responseId", HttpStatus.BAD_REQUEST);
 			regResult.put("responseStatus", "failure");
 		} else {
-			UserMaster userMaster = userRepo.findByIdAndStatus(userId,
+			UserMaster userMaster = userRepo.findByIdAndStatus(confirmUser.getUserId(),
 					categoryRepo.getByCategoryCodeAndCategoryName("INPROGRESS", "USER_STATUS"));
-			if (userMaster != null) {
-				regResult.put("message", "Email Id already Registered.");
-				regResult.put("responseId", HttpStatus.BAD_REQUEST);
-				regResult.put("responseStatus", "failure");
-			} else {
-				UserMaster user = userRepo.findById(userId);
-				CategoryMetadata confirmCategory = categoryRepo.getByCategoryName("COMPLETED");
-				user.setPaymentSubscription(confirmCategory);
+			
+				UserMaster user = userRepo.findById(confirmUser.getUserId()).get();
+				CategoryMetadata status =categoryRepo.getByCategoryCodeAndCategoryName("COMPLETED",
+						"USER_STATUS");
+				user.setStatus(status);
 				userRepo.save(user);
-				regResult.put("message", "subscription details Inserted");
+				regResult.put("message", "Registration Completed Successfully");
 				regResult.put("userId", user.getId());
+				regResult.put("responseId", HttpStatus.CREATED);
 				regResult.put("responseStatus", "success");
-			}
+			
 		}
 		return regResult;
 	}

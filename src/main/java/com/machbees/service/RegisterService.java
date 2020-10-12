@@ -11,6 +11,7 @@ import com.machbees.service.dto.UserPersonalDtFromRequest;
 import com.machbees.service.dto.UserProfileCategoryFromRequest;
 import com.machbees.service.dto.UserProfileTypeFromRequest;
 import com.machbees.service.dto.UserSetSubcriptionFromRequest;
+import com.machbees.service.dto.UserConfirmRequest;
 
 public interface RegisterService {
 	public JSONObject setEmailPassword(String emailId, String password);
@@ -33,12 +34,16 @@ public interface RegisterService {
 
 	public JSONObject updateSubscription(UserSetSubcriptionFromRequest setSubscription);
 
-	public JSONObject updateConfirm(int userId);
+	public JSONObject updateConfirm(UserConfirmRequest confirmUser);
 
 	public JSONObject fetchProfileType(long userId);
 
 	public JSONObject fetchProfileCategory(long userId);
 	
 	public JSONObject fetchSubscription(long userId);
+	
+	public JSONObject getConfirmPersonaldetails(long userId);
+	
+	public JSONObject getConfirmCompanydetails(long userId);
 
 }

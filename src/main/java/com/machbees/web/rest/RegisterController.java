@@ -29,6 +29,7 @@ import com.machbees.service.dto.UserPersonalDtFromRequest;
 import com.machbees.service.dto.UserProfileCategoryFromRequest;
 import com.machbees.service.dto.UserProfileTypeFromRequest;
 import com.machbees.service.dto.UserSetSubcriptionFromRequest;
+import com.machbees.service.dto.UserConfirmRequest;
 import com.machbees.web.rest.errors.BadRequestAlertException;
 
 @RestController
@@ -173,10 +174,22 @@ public class RegisterController {
 	}
 
 	// setConfirm
-	@PostMapping("/common/registration/confirm")
-	public ResponseEntity<?> setConfirm(@RequestBody int userId) {
+	@GetMapping("/common/registration/confirm/personalDetails/{userId}")
+	public ResponseEntity<?> getConfirmPersonaldetails(@PathVariable long userId) {
 		System.out.println("-inside-");
-		JSONObject userConfirmResult = regService.updateConfirm(userId);
+		JSONObject personalDt = regService.getConfirmPersonaldetails(userId);
+		return new ResponseEntity<JSONObject>(personalDt, HttpStatus.CREATED);
+	}
+	@GetMapping("/common/registration/confirm/companyDetails/{userId}")
+	public ResponseEntity<?> getConfirmCompanydetails(@PathVariable long userId) {
+		System.out.println("-inside-"); 
+		JSONObject personalDt = regService.getConfirmCompanydetails(userId);
+		return new ResponseEntity<JSONObject>(personalDt, HttpStatus.CREATED);
+	}
+	@PostMapping("/common/registration/confirm")
+	public ResponseEntity<?> setConfirm(@RequestBody UserConfirmRequest confirmUser) {
+		System.out.println("-inside-");
+		JSONObject userConfirmResult = regService.updateConfirm(confirmUser);
 		return new ResponseEntity<JSONObject>(userConfirmResult, HttpStatus.CREATED);
 	}
 

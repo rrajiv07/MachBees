@@ -1,10 +1,11 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ConfirmUserService } from './confirm-user.service';
+import { ConfirmCompanyDetailsService } from './confirm-company-details.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUserSkillCategoryMetadata } from 'app/shared/model/MachBees/user-skill-category-metadata.model';
 import { IUserProficiencyCategoryMetadata } from 'app/shared/model/MachBees/user-proficiency-category-metadata.model';
 import swal from 'sweetalert2';
+
 export interface Language {
   id?: number;
   language?: number;
@@ -12,11 +13,11 @@ export interface Language {
 }
 
 @Component({
-  selector: 'jhi-confirm-user',
-  templateUrl: './confirm-user.component.html',
+  selector: 'jhi-confirm-company-details',
+  templateUrl: './confirm-company-details.component.html',
   styles: [],
 })
-export class ConfirmUserComponent implements OnInit, AfterViewInit {
+export class ConfirmCompanyDetailsComponent implements OnInit, AfterViewInit {
   isSaving = false;
   languagemasters: IUserSkillCategoryMetadata[] = [];
   proficiencymasters: IUserProficiencyCategoryMetadata[] = [];
@@ -24,18 +25,24 @@ export class ConfirmUserComponent implements OnInit, AfterViewInit {
   editForm = this.fb.group({
     userId: [],
     profileType: ['', []],
-    name: ['', []],
+    companyName: ['', []],
     emailId: ['', []],
-    surName: ['', []],
+    vatId: ['', []],
+    description: ['', []],
     address: ['', []],
-    country: ['', []],
+    website: ['', []],
     mobile: ['', []],
     linkedIn: [null, []],
     twitter: [null, []],
     skypeAddress: [null, []],
   });
 
-  constructor(private fb: FormBuilder, private service: ConfirmUserService, private activeRoute: ActivatedRoute, private route: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private service: ConfirmCompanyDetailsService,
+    private activeRoute: ActivatedRoute,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {}
   save(): void {
@@ -79,6 +86,7 @@ export class ConfirmUserComponent implements OnInit, AfterViewInit {
         this.proficiencymasters = response;
       }
     });
+
     const userId = this.editForm.get(['userId'])!.value;
     this.service.fetch(userId).subscribe(response => {
       if (response != undefined) {
@@ -86,9 +94,6 @@ export class ConfirmUserComponent implements OnInit, AfterViewInit {
         this.language = response['language'];
       }
     });
-  }
-  trackById(index: number, item: any): any {
-    return item.id;
   }
   private processError(response: any): void {
     this.isSaving = false;
